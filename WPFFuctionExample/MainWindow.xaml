@@ -4,9 +4,67 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFFuctionExample"
-        mc:Ignorable="d"
+        mc:Ignorable="d"       
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleDict.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- 菜单样式 -->
+            <!--<Style x:Key="MenuStyle" TargetType="{x:Type MenuItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type MenuItem}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Width="50" Height="50" Source="{TemplateBinding Tag,Converter={x:Static local:ImageConverter.Instance}}"/>
+                                <TextBlock Width="30" Text="{TemplateBinding Header}"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>-->            
+            
+        </ResourceDictionary>        
+    </Window.Resources>
+    
+    <Grid >
+        <Grid.RowDefinitions>
+            <!-- 标题层 -->
+            <RowDefinition Height="30"/>
+            <!-- 菜单一 纯文字 -->
+            <RowDefinition Height="30"/>
+            <!-- 菜单二 图标+Tip -->
+            <RowDefinition Height="30"/>
+            <!-- 菜单三 图标+字+Tip -->
+            <RowDefinition Height="30"/>
+            <!-- 内容 -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 标题层 -->
+        <Border Grid.Row="0">
+            <local:IconButton x:Name="iBtn" BtnInfo="rsdasd"  Width="100" Height="100" />
+        </Border>
+
+        <!-- 菜单一 -->
+        <Border Grid.Row="1">
+            <Menu ItemsSource="{Binding Items}">
+                <!--<MenuItem Header="cccc" Style="{StaticResource MenuStyle}" Tag="/Icon/backgroud1.jpg"/>-->
+                <MenuItem Header="{Binding info}" Tag="{Binding path}"/> 
+            </Menu>
+        </Border>
+
+        <!-- 菜单二 -->
+        <Image x:Name="ccc"/>
+
+        <!-- 菜单三 -->
+
+
+        <!--  内容  -->
+
+
     </Grid>
 </Window>

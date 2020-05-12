@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using WPFFuctionExample.Model;
 
 namespace WPFFuctionExample.Function
 {
@@ -98,6 +100,12 @@ namespace WPFFuctionExample.Function
             }               
         }
 
+        public static string ReadFileType(string filePath)
+        {
+            string lastType = filePath.Substring(filePath.LastIndexOf("."));
+            return lastType;
+        }
+
         #endregion
 
         #region 写
@@ -159,6 +167,17 @@ namespace WPFFuctionExample.Function
             }
         }
 
+        #endregion
+
+        #region 判别
+        public static bool IsPicture(string filePath)
+        {
+            //判别是否是图片 { }
+            string type = ReadFileType(filePath);
+            var result = ImageType.Type.Where(t => t == type);           
+
+            return result!=null;
+        }
         #endregion
     }
 }

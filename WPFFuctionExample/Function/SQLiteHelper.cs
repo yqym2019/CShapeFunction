@@ -4,6 +4,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
+using WPFFuctionExample.Model;
 
 namespace WPFFuctionExample.Function
 {
@@ -65,7 +66,7 @@ namespace WPFFuctionExample.Function
             }
             catch (Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }
         }
@@ -98,7 +99,7 @@ namespace WPFFuctionExample.Function
             }
             catch (Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }
         }
@@ -155,7 +156,7 @@ namespace WPFFuctionExample.Function
             }
             catch (Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }
         }
@@ -189,7 +190,7 @@ namespace WPFFuctionExample.Function
             }
             catch(Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }          
         }
@@ -214,7 +215,7 @@ namespace WPFFuctionExample.Function
             }
             catch (Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }         
         }
@@ -246,7 +247,7 @@ namespace WPFFuctionExample.Function
             }
             catch (Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }          
         }
@@ -276,7 +277,7 @@ namespace WPFFuctionExample.Function
             }
             catch (Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }
           
@@ -610,7 +611,7 @@ namespace WPFFuctionExample.Function
             }
             catch(Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return -1;
             }           
         }
@@ -639,7 +640,7 @@ namespace WPFFuctionExample.Function
             }
             catch(Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return -1;
             }            
         }
@@ -687,7 +688,7 @@ namespace WPFFuctionExample.Function
             }
             catch(Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message,e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message,e);
                 return -1;
             }            
         }
@@ -717,7 +718,7 @@ namespace WPFFuctionExample.Function
             }
             catch(Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }            
         }
@@ -750,7 +751,7 @@ namespace WPFFuctionExample.Function
             }
             catch(Exception e)
             {
-                LogsHelper.WriteExLogInfo(FunctionType.SQLite, e.Message, e);
+                LogsHelper.WriteExLogInfo(Model.FunctionType.SQLite, e.Message, e);
                 return null;
             }
         }

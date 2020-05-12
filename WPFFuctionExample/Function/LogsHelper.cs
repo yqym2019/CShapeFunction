@@ -1,5 +1,6 @@
 ﻿
 using System;
+using WPFFuctionExample.Model;
 
 namespace WPFFuctionExample.Function
 {

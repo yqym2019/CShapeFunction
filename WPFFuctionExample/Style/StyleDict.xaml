@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ic="clr-namespace:WPFFuctionExample.ValueConverter">
+
+    <ic:ImageConverter x:Key="IConvert"/>
+
+    <!-- 按钮样式 -->
+    <Style TargetType="{x:Type Button}" x:Key="IconButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Image />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- 菜单样式 -->
+    <Style x:Key="MenuStyle" TargetType="{x:Type MenuItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type MenuItem}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{TemplateBinding Tag,Converter={StaticResource IConvert}}"/>  
+                        <TextBlock Text="{TemplateBinding Header}"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
