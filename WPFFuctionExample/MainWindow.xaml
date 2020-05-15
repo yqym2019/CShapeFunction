@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFFuctionExample"
         mc:Ignorable="d"       
+        xmlns:iic="clr-namespace:WPFFuctionExample.ValueConverter"
+        xmlns:model="clr-namespace:WPFFuctionExample.Model"
         Title="MainWindow" Height="450" Width="800">
     
     <Window.Resources>
@@ -12,21 +14,15 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/StyleDict.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <!-- 菜单样式 -->
-            <!--<Style x:Key="MenuStyle" TargetType="{x:Type MenuItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type MenuItem}">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Width="50" Height="50" Source="{TemplateBinding Tag,Converter={x:Static local:ImageConverter.Instance}}"/>
-                                <TextBlock Width="30" Text="{TemplateBinding Header}"/>
-                            </StackPanel>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>-->            
-            
+            <!--
+            <iic:IconImageConverter x:Key="IIConvert" />
+            <HierarchicalDataTemplate x:Key="MenuItemHDT" ItemsSource="{Binding Items}" DataType="{x:Type model:MenuItemModel}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding type,Converter={StaticResource IIConvert}}" Width="40" Height="40"/>
+                    <TextBlock Text="{Binding info}" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            -->
         </ResourceDictionary>        
     </Window.Resources>
     
@@ -45,23 +41,23 @@
         </Grid.RowDefinitions>
 
         <!-- 标题层 -->
-        <Border Grid.Row="0">
+        <Border Grid.Row="0" >
             <local:IconButton x:Name="iBtn" BtnInfo="rsdasd"  Width="100" Height="100" />
         </Border>
 
         <!-- 菜单一 -->
         <Border Grid.Row="1">
-            <Menu ItemsSource="{Binding Items}">
-                <!--<MenuItem Header="cccc" Style="{StaticResource MenuStyle}" Tag="/Icon/backgroud1.jpg"/>-->
-                <MenuItem Header="{Binding info}" Tag="{Binding path}"/> 
-            </Menu>
+            <!--<Menu ItemsSource="{Binding Items}" ItemTemplate="{StaticResource MenuItemHDT}">              
+                <MenuItem Header="cccc" Style="{StaticResource MenuStyle}" Tag="time" Icon="/Icon/backgroud1.jpg"/>
+                <MenuItem Header="dddd" IsCheckable="True" IsChecked="True" />             
+            </Menu>--> 
         </Border>
 
         <!-- 菜单二 -->
-        <Image x:Name="ccc"/>
-
+        <TextBox Grid.Row="2" Text="{Binding Path=Info,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Row="3" Height="60" Width="200" Text="{Binding Path=Info,Mode=OneWay}"/>
         <!-- 菜单三 -->
-
+        <Button Content="测试" Grid.Row="4" Width="100" Height="50" Command="{Binding TestCMD}"/>
 
         <!--  内容  -->
 

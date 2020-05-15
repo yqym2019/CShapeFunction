@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPFFuctionExample.Resources"
+                    xmlns:s1="clr-namespace:System;assembly=mscorlib">
+    <s1:String x:Key="CUR">气帘气</s1:String>
+    <s1:String x:Key="GS1">喷雾气</s1:String>
+    <s1:String x:Key="GS2">辅助加热气</s1:String>
+    <s1:String x:Key="IS">喷雾针高压</s1:String>
+    <s1:String x:Key="TEM">温度</s1:String>
+    <s1:String x:Key="ihe">加热器开关</s1:String>
+</ResourceDictionary>

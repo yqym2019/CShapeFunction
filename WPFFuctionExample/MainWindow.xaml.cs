@@ -23,6 +23,8 @@ namespace WPFFuctionExample
 
             //sqliteTest tt = new sqliteTest();
             this.DataContext = new MenuItemViewModel();
+
+            bool s = int.TryParse("123", out int num);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

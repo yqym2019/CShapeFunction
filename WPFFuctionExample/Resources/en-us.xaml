@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPFFuctionExample.Resources"
+                    xmlns:s1="clr-namespace:System;assembly=mscorlib">
+    <s1:String x:Key="CUR">Curtain Gas(CUR)</s1:String>
+    <s1:String x:Key="GS1">Ion Source Gas 1 (GS1)</s1:String>
+    <s1:String x:Key="GS2">Ion Source Gas 2 (GS2)</s1:String>
+    <s1:String x:Key="IS">IonSpray Voltage(IS)</s1:String>
+    <s1:String x:Key="TEM">Temperature(TEM)</s1:String>
+    <s1:String x:Key="ihe">Interface Heater(ihe)</s1:String>
+</ResourceDictionary>
