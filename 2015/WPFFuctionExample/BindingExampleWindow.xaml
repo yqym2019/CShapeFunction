@@ -1,0 +1,33 @@
+﻿<Window x:Class="WPFFuctionExample.BindingExampleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFFuctionExample"
+        mc:Ignorable="d"
+        Title="BindingExampleWindow" Height="200" Width="400">
+    <StackPanel HorizontalAlignment="Center" x:Name="sp">
+        <Slider x:Name="slider1" Width="300" Height="40" Minimum="0" Maximum="1000"/>
+        <TextBlock Text="{Binding ElementName=slider1,Path=Value}"/>
+
+        <WrapPanel>
+            <TextBlock Text="姓名:"/>
+            <TextBox Text="{Binding Name}"/>
+        </WrapPanel>
+
+        <WrapPanel>
+            <TextBlock Text="年龄:"/>
+            <TextBox Text="{Binding Age}"/>
+        </WrapPanel>
+
+        <WrapPanel>
+            <TextBlock Text="身高:"/>
+            <TextBox Text="{Binding Height}"/>
+        </WrapPanel>
+
+        <!-- DisplayMemberPath  可以设置 显示 源对象中的哪一个属性 
+        SelectedValuePath可以选择选中行的值传递的是什么 也就是SelectedValue -->
+        <ListBox x:Name="lbx1" DisplayMemberPath="Name" SelectedValuePath="Age" SelectionChanged="lbx1_SelectionChanged"
+                 Height="100" HorizontalAlignment="Center" Width="100"/>
+    </StackPanel>
+</Window>

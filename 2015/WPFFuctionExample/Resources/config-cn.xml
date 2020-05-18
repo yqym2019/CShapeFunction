@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 中文配置 页面 文件 -->
+<Config>
+	<Combobox>
+		<ScanType>
+			<type>多反应检测</type>
+			<type>中性丢失</type>
+			<type>母离子扫描</type>
+			<type>子离子扫描</type>
+			<type>Q1扫描</type>
+			<type>Q1多离子</type>
+			<type>Q3扫描</type>
+			<type>Q3多离子</type>
+		</ScanType>
+		<Resolution>
+			<type>低</type>
+			<type>单位</type>
+			<type>高</type>
+			<type>公开</type>
+		</Resolution>
+	</Combobox>
+</Config>

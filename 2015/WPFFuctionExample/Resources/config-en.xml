@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 英文配置 页面 文件 -->
+<Config>
+	<Combobox>
+		<ScanType>
+			<type>MRM(MRM)</type>
+			<type>Neutral Loss(NL)</type>
+			<type>Precursor Ion(Prec)</type>
+			<type>Product Ion(MS2)</type>
+			<type>Q1 MS(Q1)</type>
+			<type>Q1 Multiple Ions(Q1 M1)</type>
+			<type>Q3 MS(Q3)</type>
+			<type>Q3 Multiple Ions(Q3 M1)</type>
+		</ScanType>
+		<Resolution>
+			<type>Low</type>
+			<type>Unit</type>
+			<type>High</type>
+			<type>Open</type>
+		</Resolution>
+	</Combobox>
+</Config>
