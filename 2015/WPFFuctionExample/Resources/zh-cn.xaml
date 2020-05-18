@@ -8,4 +8,5 @@
     <s1:String x:Key="IS">喷雾针高压</s1:String>
     <s1:String x:Key="TEM">温度</s1:String>
     <s1:String x:Key="ihe">加热器开关</s1:String>
+    <s1:String x:Key="CAD">碰撞气</s1:String>
 </ResourceDictionary>

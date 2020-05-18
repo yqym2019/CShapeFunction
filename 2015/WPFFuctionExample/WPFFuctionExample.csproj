@@ -110,6 +110,10 @@
     <Compile Include="Model\LanguageType.cs" />
     <Compile Include="Model\MenuItemModel.cs" />
     <Compile Include="Model\PrecisionType.cs" />
+    <Compile Include="Model\UIConfigType.cs" />
+    <Compile Include="RampParamSettingWindow.xaml.cs">
+      <DependentUpon>RampParamSettingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\XmlDataService.cs" />
     <Compile Include="Test\sqliteTest.cs" />
@@ -148,6 +152,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RampParamSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\en-us.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -209,8 +217,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\WPFFuctionExample.vshost.exe" />
-    <Resource Include="Resources\config-cn.xml" />
-    <Resource Include="Resources\config-en.xml" />
+    <Resource Include="Data\config-en.xml" />
+    <Resource Include="Data\config-cn.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />

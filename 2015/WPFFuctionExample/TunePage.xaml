@@ -9,8 +9,8 @@
       d:DesignHeight="700" d:DesignWidth="1000"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       Title="TunePage"
-      ShowsNavigationUI="False"
-      DataContext="{Binding Source={StaticResource Locator},Path=TunePageVM}"
+      ShowsNavigationUI="False"     
+      xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       >
     <Page.Resources>
         <sys:Double x:Key="txbWidth" >200</sys:Double>       
@@ -35,7 +35,7 @@
                     <Button Content="Acquire" Margin="3 0 3 0" Width="100"/>
                     <Button Content="Start" Margin="3 0 3 0" Width="100"/>
                     <RadioButton Content="Ramp Paramter" VerticalAlignment="Center"/>
-                    <Button Content="Edit Ramp..." Margin="10 0 10 0" Width="100"/>
+                    <Button Content="Edit Ramp..." Margin="10 0 10 0" Width="100" Command="{Binding EditRampParamSettingCommand}"/>
                     <ComboBox Width="100" Height="30" SelectedIndex="0" VerticalContentAlignment="Center">
                         <ComboBoxItem >MS Method</ComboBoxItem>
                     </ComboBox>
@@ -51,7 +51,6 @@
                 <TabControl >
                     <!-- Source/Gas -->
                     <TabItem  Header="Source/Gas">
-
                         <StackPanel >
                             <WrapPanel Background="LightGray" Margin="0 10 0 10">
                                 <TextBlock Text="Ion Source:"/>
@@ -62,70 +61,91 @@
                                 <TextBlock Text=" Y"/>
                             </WrapPanel>
 
-                            <WrapPanel Background="LightGray" Margin="0 0 0 10">
-                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource CUR}" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Num="{Binding CUR,FallbackValue=100,Mode=TwoWay}"
-                                                       Grid.Row="0" Grid.Column="2" Precision="I1"/>
+                            <WrapPanel Background="LightGray" Margin="0 0 0 10" x:Name="wplCAD">
+                                <TextBlock Text="{DynamicResource CAD}" Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Num="{Binding CAD,FallbackValue=4,Mode=TwoWay}"
+                                                       Precision="I1"/>
                             </WrapPanel>
 
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{DynamicResource GS1}" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Num="{Binding GS1,FallbackValue=100,Mode=TwoWay}"
-                                                       Grid.Row="1" Grid.Column="2" Precision="I1"/>
+                                <TextBlock Text="{DynamicResource CUR}" Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Num="{Binding CUR,FallbackValue=10,Mode=TwoWay}"
+                                                       Precision="I1"/>
                             </WrapPanel>
 
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
-                                <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource GS2}" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Num="{Binding GS2,FallbackValue=100,Mode=TwoWay}"
-                                                       Grid.Row="2" Grid.Column="2" Precision="I1" />
+                                <TextBlock Text="{DynamicResource GS1}" Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Num="{Binding GS1,FallbackValue=20,Mode=TwoWay}"
+                                                       Precision="I1"/>
                             </WrapPanel>
 
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
-                                <TextBlock Grid.Column="0" Grid.Row="3" Text="{DynamicResource IS}" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Num="{Binding IS,FallbackValue=100,Mode=TwoWay}"
-                                                       Grid.Row="3" Grid.Column="2" Precision="F01"/>
+                                <TextBlock Text="{DynamicResource GS2}" Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Num="{Binding GS2,FallbackValue=0,Mode=TwoWay}"
+                                                       Precision="I1" />
                             </WrapPanel>
 
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
-                                <TextBlock Grid.Column="0" Grid.Row="4" Text="{DynamicResource TEM}" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Num="{Binding TEM,FallbackValue=100,Mode=TwoWay}"
-                                                       Grid.Row="4" Grid.Column="2" Precision="F01"/>                       
+                                <TextBlock Text="{DynamicResource IS}" Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Num="{Binding IS,FallbackValue=-4200,Mode=TwoWay}"
+                                                       Precision="F01"/>
                             </WrapPanel>
 
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
-                                <TextBlock Text="{DynamicResource ihe}" Grid.Row="5" Grid.Column="0" Width="{StaticResource txbWidth}"/>
-                                <ToggleButton Content="Off" Grid.Row="5" Grid.Column="3" Width="50" Height="30"/>
+                                <TextBlock Text="{DynamicResource TEM}" Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Num="{Binding TEM,FallbackValue=0.0,Mode=TwoWay}"
+                                                       Precision="F01"/>                       
+                            </WrapPanel>
+
+                            <WrapPanel Background="LightGray" Margin="0 0 0 10">
+                                <TextBlock Text="{DynamicResource ihe}" Width="{StaticResource txbWidth}"/>
+                                <ToggleButton Content="Off" Width="50" Height="30"/>
                             </WrapPanel>  
                         </StackPanel>
                     </TabItem>
                     <!-- Compound -->
                     <TabItem  Header="Compound">
                         <StackPanel>
-                            <WrapPanel Background="LightGray">
-                                <TextBlock Text="Declustering Potential(DP)" VerticalAlignment="Center" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Precision="F01" Num="20.0"/>
+                            <WrapPanel Background="LightGray" Margin="0 5 0 0">
+                                <TextBlock Text="Declustering Potential(DP)" VerticalAlignment="Center" 
+                                           Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding DP,FallbackValue=20.0}"/>
                             </WrapPanel>
                             <WrapPanel Background="LightGray" Margin="0 5 0 0">
-                                <TextBlock Text="Entrance Potential(EP)" VerticalAlignment="Center" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Precision="F01" Num="10.0"/>
+                                <TextBlock Text="Entrance Potential(EP)" VerticalAlignment="Center" 
+                                           Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding EP,FallbackValue=35.0}"/>
+                            </WrapPanel>
+                            <WrapPanel Background="LightGray" Margin="0 5 0 0" x:Name="wplRO2">
+                                <TextBlock Text="Collision Cell Rod Offset(RO2)" VerticalAlignment="Center" 
+                                           Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding RO2,FallbackValue=20.0}"/>
+                            </WrapPanel>
+                            <WrapPanel Background="LightGray" Margin="0 5 0 0" x:Name="wplCE">
+                                <TextBlock Text="Collision Energy(CE)" VerticalAlignment="Center" 
+                                           Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding CE,FallbackValue=30.0}"/>
+                            </WrapPanel>
+                            <WrapPanel Background="LightGray" Margin="0 5 0 0" x:Name="wplCXP">
+                                <TextBlock Text="Collision Cell Exit Potential(CXP)" VerticalAlignment="Center" 
+                                           Width="{StaticResource txbWidth}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding CXP,FallbackValue=-15.0}"/>
                             </WrapPanel>
                         </StackPanel>
-
-
                     </TabItem>
                     <!-- Resolution -->
                     <TabItem  Header="Resolution">
                         <StackPanel >
                             <!-- Q1 Resolution -->
-                            <GroupBox Header="Quad1" Visibility="Visible">
+                            <GroupBox Header="Quad1" x:Name="gbxQuad1">
                                 <StackPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Ion Energy 1 (IE1)" />
-                                        <vc:ValueChooseControl Precision="F01"  Num="0.8" />
+                                        <vc:ValueChooseControl Precision="F01"  Num="{Binding IE1,FallbackValue=0.8}" />
                                     </WrapPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Q1 Resolution:" />
-                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}"/>
+                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}" SelectedValue="{Binding IE1ResolutionValue}"/>
                                     </WrapPanel>
                                     <Button Grid.Row="2" Grid.Column="2" Content="Advanced..." Width="80" 
                                             Height="30" HorizontalAlignment="Right" Background="LightGray"/>
@@ -133,15 +153,15 @@
                             </GroupBox>
                             
                             <!-- Q3 Resolution -->
-                            <GroupBox Header="Quad3" Visibility="Visible">
+                            <GroupBox Header="Quad3" x:Name="gbxQuad3">
                                 <StackPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Ion Energy 3 (IE3)" />
-                                        <vc:ValueChooseControl Precision="F01"  Num="0.8" />
+                                        <vc:ValueChooseControl Precision="F01"  Num="{Binding IE3,FallbackValue=0.8}" />
                                     </WrapPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Q3 Resolution:" />
-                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}"/>
+                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}" SelectedValue="{Binding IE3ResolutionValue}"/>
                                     </WrapPanel>
                                     <Button Grid.Row="2" Grid.Column="2" Content="Advanced..." Width="80" 
                                             Height="30" HorizontalAlignment="Right" Background="LightGray"/>
@@ -154,16 +174,15 @@
                         <StackPanel>
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                 <TextBlock Text="CEM(CEM)" VerticalAlignment="Center" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Precision="F01" Num="2200.0" />
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding CEM,FallbackValue=2200.0}" />
                             </WrapPanel>
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                 <TextBlock Text="Deflector(DF)" VerticalAlignment="Center" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Precision="F01" Num="-100.0"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding DF,FallbackValue=-100.0}"/>
                             </WrapPanel>
                         </StackPanel>
                     </TabItem>
                 </TabControl>
-
             </Border>
 
             <!-- 质谱检测参数 与 高级设置 -->
@@ -185,7 +204,15 @@
 
                             <WrapPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0,40">
                                 <TextBlock Text="Scan Type:" Margin="0 0 30 0"/>
-                                <ComboBox Width="160" FontSize="10" ItemsSource="{Binding ScanTypeList}"/>
+                                <!-- 重写 SelectChanged 映射事件 -->
+                                <ComboBox x:Name="cbxScanType" Width="160" FontSize="10" ItemsSource="{Binding ScanTypeList}" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding ScanTypeCommand}"
+                                                                   CommandParameter="{Binding ElementName=cbxScanType,Path=SelectedIndex}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
                             </WrapPanel>
 
                             <WrapPanel Grid.Row="0" Grid.Column="3" VerticalAlignment="Top">
@@ -218,30 +245,52 @@
 
                                     <WrapPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">
                                         <TextBlock Text="Duration:"/>
-                                        <TextBox Width="80" Margin="10 0 10 0"/>
+                                        <TextBox Width="80" Margin="10 0 10 0" Text="{Binding Duration,FallbackValue=0.000}"/>
                                         <TextBlock Text="(min)"/>
                                     </WrapPanel>
                                     <WrapPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
                                         <TextBlock Text="Delay Time:"/>
-                                        <TextBox Width="80" Margin="10 0 10 0"/>
+                                        <TextBox Width="80" Margin="10 0 10 0" Text="{Binding DelayTime,FallbackValue=0}"/>
                                         <TextBlock Text="(sec)"/>
                                     </WrapPanel>
                                     <WrapPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
                                         <TextBlock Text="Cycles:" Margin="0 0 10 0"/>
-                                        <vc:ValueChooseControl  UCHeight="30" UCWidth="70" Precision="I1"/>
+                                        <vc:ValueChooseControl  UCHeight="30" UCWidth="70" Precision="I1" Num="{Binding Cycles,FallbackValue=1}"/>
                                     </WrapPanel>
 
                                 </Grid>
                             </GroupBox>
 
-                            <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-                                <CheckBox Content="MCA" DockPanel.Dock="Top" Margin="10"/>
-                                <WrapPanel DockPanel.Dock="Bottom" VerticalAlignment="Center">
-                                    <TextBlock TextWrapping="Wrap" Width="120" Text="Total Scan Time (Includes Pauses):" />
-                                    <TextBox Width="100"/>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                                <CheckBox Content="MCA" Margin="10"/>
+                                <WrapPanel Margin="10 10 0 10" Visibility="Collapsed" x:Name="wplLossGain">
+                                    <ComboBox Width="100" Margin="0 0 30 0" ItemsSource="{Binding GainLossOfList}"/>
+                                    <TextBox Width="80" Margin="0 0 10 0" VerticalContentAlignment="Center" 
+                                             Text="{Binding GainLossValue,FallbackValue=30.000}"/>
+                                    <TextBlock Text="(sec)"/>
+                                </WrapPanel>
+                                <WrapPanel Margin="10 10 0 10" Visibility="Collapsed" x:Name="wplPrec">
+                                    <TextBlock Width="120" Margin="0 0 10 0"
+                                               Text="Precursor Of:" />
+                                    <TextBox Width="80" Text="{Binding PrecursorOfValue,FallbackValue=30.000}"
+                                             Margin="0 0 10 0" VerticalContentAlignment="Center"/>
+                                    <TextBlock Text="(Da)" VerticalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Margin="10 10 0 10" Visibility="Visible" x:Name="wplProduct">
+                                    <TextBlock Width="120" Margin="0 0 10 0"
+                                               Text="Product Of:" />
+                                    <TextBox Width="80" Text="{Binding ProductOfValue,FallbackValue=30.000}"
+                                             Margin="0 0 10 0" VerticalContentAlignment="Center"/>
+                                    <TextBlock Text="(Da)" VerticalAlignment="Center"/>
+                                </WrapPanel>
+                                <WrapPanel Margin="10 10 0 10">
+                                    <TextBlock TextWrapping="Wrap" Width="120" Margin="0 0 10 0"
+                                               Text="Total Scan Time (Includes Pauses):" />
+                                    <TextBox Width="80" Text="{Binding TotalScanTime,FallbackValue=0.0000}"
+                                             Margin="0 0 10 0" VerticalContentAlignment="Center" x:Name="txbTotalScanTime"/>
                                     <TextBlock Text="(sec)" VerticalAlignment="Center"/>
                                 </WrapPanel>
-                            </DockPanel>
+                            </StackPanel>
 
                             <Border Grid.Row="2" Grid.Column="3" BorderBrush="Gray" BorderThickness="2" Margin="10">
                                 <DataGrid CanUserAddRows="True">
@@ -259,26 +308,38 @@
                         <StackPanel >
                             <WrapPanel Margin="10">
                                 <TextBlock Text="Scan mode:" Width="130"/>
-                                <ComboBox Width="100"/>
+                                <ComboBox Width="100" ItemsSource="{Binding ScanModeList}"/>
                             </WrapPanel>
                             <WrapPanel Margin="10 0 10 0">
                                 <TextBlock Text="Step size:" Width="130" VerticalAlignment="Center"/>
-                                <TextBox Width="80" Height="25" Margin="0 0 10 0"/>
+                                <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding StepSize,FallbackValue=0.1}"/>
                                 <TextBlock Text="(Da)"/>
+                            </WrapPanel>
+                            <WrapPanel Height="120" >
+                                <TextBlock Text="Mass defect:" Width="130" VerticalAlignment="Center"/>
+                                <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding MassDefect,FallbackValue=55}"/>
+                                <TextBlock Text="mDa/(100*Da)"/>
                             </WrapPanel>
                             <WrapPanel Margin="10">
                                 <TextBlock Text="Intensity threshold (total count):" TextWrapping="Wrap" Width="130" VerticalAlignment="Center"/>
-                                <TextBox Width="80" Height="25"/>
+                                <TextBox Width="80" Height="25" Text="{Binding IntensityThreshold,FallbackValue=0}"/>
                             </WrapPanel>
                             <WrapPanel Margin="10 0 10 0">
                                 <TextBlock Text="Setting time:" Width="130" VerticalAlignment="Center"/>
-                                <TextBox Width="80" Height="25" Margin="0 0 10 0"/>
+                                <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding SettingTime,FallbackValue=0}"/>
                                 <TextBlock Text="(ms)"/>
+                                <WrapPanel Margin="30 0 0 0" >
+                                </WrapPanel>
                             </WrapPanel>
                             <WrapPanel Margin="10">
                                 <TextBlock Text="Pause between mass ranges:" Width="130" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                <TextBox Width="80" Height="25" Margin="0 0 10 0"/>
+                                <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding MRPauseTime,FallbackValue=5.007}"/>
                                 <TextBlock Text="(ms)"/>
+                                <WrapPanel Margin="30 0 0 0" >
+                                    <TextBlock Text="Min.peak.width:" Width="130" VerticalAlignment="Center"/>
+                                    <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding MinPeakWidth,FallbackValue=1}"/>
+                                    <TextBlock Text="(Da)"/>
+                                </WrapPanel>
                             </WrapPanel>
                         </StackPanel>
                     </TabItem>

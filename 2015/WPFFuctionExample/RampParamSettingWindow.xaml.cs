@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPFFuctionExample.ViewModel;
 
 namespace WPFFuctionExample
 {
     /// <summary>
-    /// TunePage.xaml 的交互逻辑
+    /// Interaction logic for RampParamSetting.xaml
     /// </summary>
-    public partial class TunePage : Page
+    public partial class RampParamSettingWindow : Window
     {
-        public TunePage()
+        public RampParamSettingWindow()
         {
             InitializeComponent();
-            this.DataContext = new TunePageViewModel(this);
-        }       
+        }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

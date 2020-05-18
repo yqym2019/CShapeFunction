@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 namespace WPFFuctionExample.Model
 {
     /// <summary>
-    /// 语言类别
+    /// UI界面 资源类别
     /// </summary>
-    public enum LanguageType
+    public enum UIConfigType
     {
-        chs,
-        jpn,
-        kor,
-        dan,
-        deu,
-        en
+        ScanType,
+        Resolution,
+        ScanMode,
+        RampParameterSettings,
+        MS_OffSet
     }
 }

@@ -8,4 +8,5 @@
     <s1:String x:Key="IS">IonSpray Voltage(IS)</s1:String>
     <s1:String x:Key="TEM">Temperature(TEM)</s1:String>
     <s1:String x:Key="ihe">Interface Heater(ihe)</s1:String>
+    <s1:String x:Key="CAD">Collision Gas(CAD)</s1:String>
 </ResourceDictionary>

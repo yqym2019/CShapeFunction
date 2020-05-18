@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPFFuctionExample.Model;
 
 namespace WPFFuctionExample.Services
 {
@@ -11,6 +12,6 @@ namespace WPFFuctionExample.Services
     /// </summary>
     interface IDataService
     {
-        List<string> GetAllScanType();
+        List<string> GetAllType(LanguageType lType, UIConfigType uiCtype);
     }
 }

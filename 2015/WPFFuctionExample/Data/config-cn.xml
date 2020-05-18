@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<!-- 中文UI配置数据文件 -->
+<Config>
+  <ScanType>
+    <Type>多反应检测</Type>
+    <Type>中性丢失</Type>
+    <Type>母离子扫描</Type>
+    <Type>子离子检测</Type>
+    <Type>Q1 扫描</Type>
+    <Type>Q1 多离子扫描</Type>
+    <Type>Q3 扫描</Type>
+    <Type>Q3 多离子扫描</Type>
+  </ScanType>
+  <Resolution>
+    <Type>低</Type>
+    <Type>单位</Type>
+    <Type>高</Type>
+    <Type>公开</Type>
+  </Resolution>
+  <ScanMode>
+    <Type>描述</Type>
+    <Type>快速描述</Type>
+    <Type>重心</Type>
+    <Type>跳峰方式</Type>
+  </ScanMode>
+  <RampParamSetting>
+    <Type>无</Type>
+    <Type>解离电位</Type>
+    <Type>入口电位</Type>
+    <Type>碰撞能量</Type>
+    <Type>碰撞单元出口电位</Type>
+  </RampParamSetting>
+  <MS_OffSet>
+    <Type>减少</Type>
+    <Type>增加</Type>
+  </MS_OffSet>
+</Config>

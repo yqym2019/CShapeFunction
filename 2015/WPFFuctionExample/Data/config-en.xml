@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 英文UI配置数据文件 -->
+<Config>
+  <ScanType>
+    <Type>MRM(MRM)</Type>
+    <Type>Neutral Ion(NL)</Type>
+    <Type>Precursor Ion(Prec)</Type>
+    <Type>Product Ion(MS2)</Type>
+    <Type>Q1 MS(Q1)</Type>
+    <Type>Q1 Multiple Ions(Q1 M1)</Type>
+    <Type>Q3 MS(Q3)</Type>
+    <Type>Q3 Multiple Ions(Q3 M1)</Type>
+  </ScanType>
+  <Resolution>
+    <Type>Low</Type>
+    <Type>Unit</Type>
+    <Type>High</Type>
+    <Type>Open</Type>
+  </Resolution>
+  <ScanMode>
+    <Type>Profile</Type>
+    <Type>Fase Profile</Type>
+    <Type>Centroid</Type>
+    <Type>Peak Hopping</Type>
+  </ScanMode>
+  <RampParamSetting>
+    <Type>None</Type>
+    <Type>Declustering Potential</Type>
+    <Type>Enhance Potential</Type>
+    <Type>Collision Cell Rod Offset</Type>
+    <Type>Collision Cell Exit Potential</Type>
+  </RampParamSetting>
+  <MS_OffSet>
+    <Type>Loss Of</Type>
+    <Type>Gain Of</Type>
+  </MS_OffSet>
+</Config>
