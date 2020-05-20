@@ -24,7 +24,12 @@ namespace WPFFuctionExample
         public TunePage()
         {
             InitializeComponent();
-            this.DataContext = new TunePageViewModel(this);
-        }       
+            this.DataContext = new TunePageViewModel(this);            
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

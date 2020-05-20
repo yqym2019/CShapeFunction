@@ -11,6 +11,7 @@
       Title="TunePage"
       ShowsNavigationUI="False"     
       xmlns:i ="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+      Loaded="Page_Loaded"
       >
     <Page.Resources>
         <sys:Double x:Key="txbWidth" >200</sys:Double>       
@@ -32,17 +33,17 @@
             <!-- 一排按钮 和 方法选择下拉框 -->
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
                 <WrapPanel VerticalAlignment="Center">
-                    <Button Content="Acquire" Margin="3 0 3 0" Width="100"/>
-                    <Button Content="Start" Margin="3 0 3 0" Width="100"/>
-                    <RadioButton Content="Ramp Paramter" VerticalAlignment="Center"/>
+                    <Button Content="Acquire" Margin="3 0 3 0" Width="100" Command="{Binding TestCommand}"/>
+                    <Button Content="Start" Margin="3 0 3 0" Width="100" Command="{Binding StartCommand}"/>
+                    <CheckBox Content="Ramp Paramter" VerticalAlignment="Center"/>
                     <Button Content="Edit Ramp..." Margin="10 0 10 0" Width="100" Command="{Binding EditRampParamSettingCommand}"/>
                     <ComboBox Width="100" Height="30" SelectedIndex="0" VerticalContentAlignment="Center">
                         <ComboBoxItem >MS Method</ComboBoxItem>
                     </ComboBox>
-                    <RadioButton Content="Use" IsChecked="True" VerticalAlignment="Center"/>
-                    <ToggleButton x:Name="btnLanguageChange" Width="100" Content="{Binding LanguageTipInfo}" Margin="10 0 0 0 " Command="{Binding LanguageChangedCommand}" CommandParameter="{Binding ElementName=btnLanguageChange,Path=IsChecked}">
-
-                    </ToggleButton>
+                    <CheckBox Content="Use" IsChecked="True" VerticalAlignment="Center"/>
+                    <ToggleButton x:Name="btnLanguageChange" Width="100" Content="{Binding LanguageTipInfo}"
+                                  Margin="10 0 0 0 " Command="{Binding LanguageChangedCommand}"
+                                  CommandParameter="{Binding ElementName=btnLanguageChange,Path=IsChecked}"/>
                 </WrapPanel>
             </Border>
 
@@ -61,7 +62,7 @@
                                 <TextBlock Text=" Y"/>
                             </WrapPanel>
 
-                            <WrapPanel Background="LightGray" Margin="0 0 0 10" x:Name="wplCAD">
+                            <WrapPanel Background="LightGray" Margin="0 0 0 10" Visibility="{Binding CADVisibility}">
                                 <TextBlock Text="{DynamicResource CAD}" Width="{StaticResource txbWidth}"/>
                                 <vc:ValueChooseControl Num="{Binding CAD,FallbackValue=4,Mode=TwoWay}"
                                                        Precision="I1"/>
@@ -116,17 +117,17 @@
                                            Width="{StaticResource txbWidth}"/>
                                 <vc:ValueChooseControl Precision="F01" Num="{Binding EP,FallbackValue=35.0}"/>
                             </WrapPanel>
-                            <WrapPanel Background="LightGray" Margin="0 5 0 0" x:Name="wplRO2">
+                            <WrapPanel Background="LightGray" Margin="0 5 0 0" Visibility="{Binding RO2Visibility}">
                                 <TextBlock Text="Collision Cell Rod Offset(RO2)" VerticalAlignment="Center" 
                                            Width="{StaticResource txbWidth}"/>
                                 <vc:ValueChooseControl Precision="F01" Num="{Binding RO2,FallbackValue=20.0}"/>
                             </WrapPanel>
-                            <WrapPanel Background="LightGray" Margin="0 5 0 0" x:Name="wplCE">
+                            <WrapPanel Background="LightGray" Margin="0 5 0 0" Visibility="{Binding CEVisibility}">
                                 <TextBlock Text="Collision Energy(CE)" VerticalAlignment="Center" 
                                            Width="{StaticResource txbWidth}"/>
                                 <vc:ValueChooseControl Precision="F01" Num="{Binding CE,FallbackValue=30.0}"/>
                             </WrapPanel>
-                            <WrapPanel Background="LightGray" Margin="0 5 0 0" x:Name="wplCXP">
+                            <WrapPanel Background="LightGray" Margin="0 5 0 0" Visibility="{Binding CXPVisibility}">
                                 <TextBlock Text="Collision Cell Exit Potential(CXP)" VerticalAlignment="Center" 
                                            Width="{StaticResource txbWidth}"/>
                                 <vc:ValueChooseControl Precision="F01" Num="{Binding CXP,FallbackValue=-15.0}"/>
@@ -134,10 +135,10 @@
                         </StackPanel>
                     </TabItem>
                     <!-- Resolution -->
-                    <TabItem  Header="Resolution">
+                    <TabItem  Header="Resolution" >
                         <StackPanel >
                             <!-- Q1 Resolution -->
-                            <GroupBox Header="Quad1" x:Name="gbxQuad1">
+                            <GroupBox Header="Quad1" Visibility="{Binding Quad1Visibility,FallbackValue=0}">
                                 <StackPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Ion Energy 1 (IE1)" />
@@ -145,7 +146,8 @@
                                     </WrapPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Q1 Resolution:" />
-                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}" SelectedValue="{Binding IE1ResolutionValue}"/>
+                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}" 
+                                                  SelectedValue="{Binding IE1ResolutionValue}"/>
                                     </WrapPanel>
                                     <Button Grid.Row="2" Grid.Column="2" Content="Advanced..." Width="80" 
                                             Height="30" HorizontalAlignment="Right" Background="LightGray"/>
@@ -153,7 +155,7 @@
                             </GroupBox>
                             
                             <!-- Q3 Resolution -->
-                            <GroupBox Header="Quad3" x:Name="gbxQuad3">
+                            <GroupBox Header="Quad3" Visibility="{Binding Quad3Visibility,FallbackValue=0}">
                                 <StackPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Ion Energy 3 (IE3)" />
@@ -205,11 +207,13 @@
                             <WrapPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="0,40">
                                 <TextBlock Text="Scan Type:" Margin="0 0 30 0"/>
                                 <!-- 重写 SelectChanged 映射事件 -->
-                                <ComboBox x:Name="cbxScanType" Width="160" FontSize="10" ItemsSource="{Binding ScanTypeList}" >
+                                <ComboBox x:Name="cbxScanType" Width="160" FontSize="10" 
+                                          ItemsSource="{Binding ScanTypeList}"
+                                          SelectedIndex="{Binding cbxScanTypeIndex,Mode=TwoWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding ScanTypeCommand}"
-                                                                   CommandParameter="{Binding ElementName=cbxScanType,Path=SelectedIndex}" />
+                                                                   CommandParameter="{Binding ElementName=cbxScanType,Path=SelectedValue}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ComboBox>
@@ -227,8 +231,8 @@
                             <GroupBox Header="Polanity" Height="60" Grid.Row="1" Grid.Column="0" 
                                       VerticalAlignment="Center" HorizontalAlignment="Center" Padding="60 0 20 0" Grid.ColumnSpan="3" Margin="48,30">
                                 <StackPanel>
-                                    <RadioButton Content="Positive" IsChecked="True"/>
-                                    <RadioButton Content="Negative"/>
+                                    <RadioButton Content="Positive" IsChecked="True" Command="{Binding PositiveCommand}"/>
+                                    <RadioButton Content="Negative" Command="{Binding NegativeCommand}"/>
                                 </StackPanel>
                             </GroupBox>
 
@@ -257,26 +261,35 @@
                                         <TextBlock Text="Cycles:" Margin="0 0 10 0"/>
                                         <vc:ValueChooseControl  UCHeight="30" UCWidth="70" Precision="I1" Num="{Binding Cycles,FallbackValue=1}"/>
                                     </WrapPanel>
-
                                 </Grid>
                             </GroupBox>
 
                             <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
                                 <CheckBox Content="MCA" Margin="10"/>
-                                <WrapPanel Margin="10 10 0 10" Visibility="Collapsed" x:Name="wplLossGain">
-                                    <ComboBox Width="100" Margin="0 0 30 0" ItemsSource="{Binding GainLossOfList}"/>
-                                    <TextBox Width="80" Margin="0 0 10 0" VerticalContentAlignment="Center" 
-                                             Text="{Binding GainLossValue,FallbackValue=30.000}"/>
+                                <WrapPanel Margin="10 10 0 10" Visibility="{Binding LossGainVisibility}">
+                                    <ComboBox Width="100" Margin="0 0 30 0" ItemsSource="{Binding GainLossOfList}"
+                                              x:Name="cbxGainLossOf" SelectedIndex="{Binding cbxLossGainIndex,Mode=TwoWay}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding LossGainOfCommand}"
+                                                                       CommandParameter="{Binding ElementName=cbxGainLossOf,Path=SelectedValue}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ComboBox>
+                                    <TextBox Width="80" Margin="0 0 10 0" Visibility="{Binding tbxGainOfVisibility,FallbackValue=2}"
+                                             VerticalContentAlignment="Center" Text="{Binding GainOfValue,FallbackValue=30.000}"/>
+                                    <TextBox Width="80" Margin="0 0 10 0" Visibility="{Binding tbxLossOfVisibility,FallbackValue=2}"
+                                             VerticalContentAlignment="Center" Text="{Binding LossOfValue,FallbackValue=30.000}"/>
                                     <TextBlock Text="(sec)"/>
                                 </WrapPanel>
-                                <WrapPanel Margin="10 10 0 10" Visibility="Collapsed" x:Name="wplPrec">
+                                <WrapPanel Margin="10 10 0 10" Visibility="{Binding PrecVisibility,FallbackValue=2}">
                                     <TextBlock Width="120" Margin="0 0 10 0"
                                                Text="Precursor Of:" />
                                     <TextBox Width="80" Text="{Binding PrecursorOfValue,FallbackValue=30.000}"
                                              Margin="0 0 10 0" VerticalContentAlignment="Center"/>
                                     <TextBlock Text="(Da)" VerticalAlignment="Center"/>
                                 </WrapPanel>
-                                <WrapPanel Margin="10 10 0 10" Visibility="Visible" x:Name="wplProduct">
+                                <WrapPanel Margin="10 10 0 10" Visibility="{Binding ProductVisibility,FallbackValue=0}">
                                     <TextBlock Width="120" Margin="0 0 10 0"
                                                Text="Product Of:" />
                                     <TextBox Width="80" Text="{Binding ProductOfValue,FallbackValue=30.000}"
@@ -293,13 +306,13 @@
                             </StackPanel>
 
                             <Border Grid.Row="2" Grid.Column="3" BorderBrush="Gray" BorderThickness="2" Margin="10">
-                                <DataGrid CanUserAddRows="True">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Start(Da)" Width="100"/>
-                                        <DataGridTextColumn Header="Stop(Da)" Width="100"/>
-                                        <DataGridTextColumn Header="Time(sec)" Width="*"/>
+                                <DataGrid CanUserAddRows="True" x:Name="dgMSConfig" AutoGenerateColumns="False" />
+                                                                 <!--<DataGrid.Columns>
+                                        <DataGridTextColumn Header="Start(Da)" Width="100" Binding="{Binding Start}"/>
+                                        <DataGridTextColumn Header="Stop(Da)" Width="100" Binding="{Binding Stop}"/>
+                                        <DataGridTextColumn Header="Time(sec)" Width="*" Binding="{Binding Time}"/>
                                     </DataGrid.Columns>
-                                </DataGrid>
+                                </DataGrid>-->
                             </Border>
                         </Grid>
                     </TabItem>
@@ -308,14 +321,22 @@
                         <StackPanel >
                             <WrapPanel Margin="10">
                                 <TextBlock Text="Scan mode:" Width="130"/>
-                                <ComboBox Width="100" ItemsSource="{Binding ScanModeList}"/>
+                                <ComboBox Width="100" x:Name="cbxScanMode" ItemsSource="{Binding ScanModeList}" 
+                                          SelectedIndex="{Binding cbxScanModeIndex}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding ScanModeCommand}" 
+                                                                   CommandParameter="{Binding ElementName=cbxScanMode,Path=SelectedValue}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
                             </WrapPanel>
                             <WrapPanel Margin="10 0 10 0">
                                 <TextBlock Text="Step size:" Width="130" VerticalAlignment="Center"/>
                                 <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding StepSize,FallbackValue=0.1}"/>
                                 <TextBlock Text="(Da)"/>
                             </WrapPanel>
-                            <WrapPanel Height="120" >
+                            <WrapPanel Height="120" Margin="10" Visibility="{Binding MassDefectVisibility}">
                                 <TextBlock Text="Mass defect:" Width="130" VerticalAlignment="Center"/>
                                 <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding MassDefect,FallbackValue=55}"/>
                                 <TextBlock Text="mDa/(100*Da)"/>
@@ -324,18 +345,21 @@
                                 <TextBlock Text="Intensity threshold (total count):" TextWrapping="Wrap" Width="130" VerticalAlignment="Center"/>
                                 <TextBox Width="80" Height="25" Text="{Binding IntensityThreshold,FallbackValue=0}"/>
                             </WrapPanel>
-                            <WrapPanel Margin="10 0 10 0">
+                            <WrapPanel Margin="10 0 10 0" >
                                 <TextBlock Text="Setting time:" Width="130" VerticalAlignment="Center"/>
                                 <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding SettingTime,FallbackValue=0}"/>
                                 <TextBlock Text="(ms)"/>
-                                <WrapPanel Margin="30 0 0 0" >
+                                <WrapPanel Margin="30 0 0 0" Visibility="{Binding MinPeakSepVisibility}">
+                                    <TextBlock Text="Min.peak.separation:" Width="130" VerticalAlignment="Center"/>
+                                    <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding MinPeakSep,FallbackValue=1}"/>
+                                    <TextBlock Text="(Da)"/>
                                 </WrapPanel>
                             </WrapPanel>
                             <WrapPanel Margin="10">
                                 <TextBlock Text="Pause between mass ranges:" Width="130" TextWrapping="Wrap" VerticalAlignment="Center"/>
                                 <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding MRPauseTime,FallbackValue=5.007}"/>
                                 <TextBlock Text="(ms)"/>
-                                <WrapPanel Margin="30 0 0 0" >
+                                <WrapPanel Margin="30 0 0 0" Visibility="{Binding MinPeakWidthVisibility}">
                                     <TextBlock Text="Min.peak.width:" Width="130" VerticalAlignment="Center"/>
                                     <TextBox Width="80" Height="25" Margin="0 0 10 0" Text="{Binding MinPeakWidth,FallbackValue=1}"/>
                                     <TextBlock Text="(Da)"/>

@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:WPFFuctionExample"
         mc:Ignorable="d"
         Title="RampParameter Settings" Height="230" Width="300" WindowStyle="ToolWindow"
-        DataContext="{Binding Source={StaticResource Locator},Path=TunePageVM}">
+        Loaded="Window_Loaded">
     <StackPanel Background="LightGray">
         <WrapPanel Margin="5">
             <TextBlock Text="Parameter" Width="80" Margin="5"/>
-            <ComboBox Width="180" ItemsSource="{Binding RampParamSettings}"/>
+            <ComboBox Width="180" x:Name="cbxParam" />
         </WrapPanel>
         <WrapPanel Margin="5">
             <TextBlock Text="Start" Width="80" Margin="5"/>

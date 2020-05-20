@@ -19,7 +19,7 @@
   </Resolution>
   <ScanMode>
     <Type>Profile</Type>
-    <Type>Fase Profile</Type>
+    <Type>Fast Profile</Type>
     <Type>Centroid</Type>
     <Type>Peak Hopping</Type>
   </ScanMode>

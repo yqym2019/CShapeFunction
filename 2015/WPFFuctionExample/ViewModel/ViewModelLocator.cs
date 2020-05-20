@@ -53,7 +53,7 @@ namespace WPFFuctionExample.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
         public TunePageViewModel TunePageVM
         {
             get

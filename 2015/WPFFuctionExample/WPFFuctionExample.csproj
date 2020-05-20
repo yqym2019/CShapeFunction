@@ -109,6 +109,7 @@
     <Compile Include="Model\ImageType.cs" />
     <Compile Include="Model\LanguageType.cs" />
     <Compile Include="Model\MenuItemModel.cs" />
+    <Compile Include="Model\MSConfig.cs" />
     <Compile Include="Model\PrecisionType.cs" />
     <Compile Include="Model\UIConfigType.cs" />
     <Compile Include="RampParamSettingWindow.xaml.cs">
