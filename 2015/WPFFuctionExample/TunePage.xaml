@@ -65,7 +65,7 @@
                             <WrapPanel Background="LightGray" Margin="0 0 0 10" Visibility="{Binding CADVisibility}">
                                 <TextBlock Text="{DynamicResource CAD}" Width="{StaticResource txbWidth}"/>
                                 <vc:ValueChooseControl Num="{Binding CAD,FallbackValue=4,Mode=TwoWay}"
-                                                       Precision="I1"/>
+                                                       Precision="I1" MinValue="1" MaxValue="10"/>
                             </WrapPanel>
 
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
@@ -89,7 +89,7 @@
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                 <TextBlock Text="{DynamicResource IS}" Width="{StaticResource txbWidth}"/>
                                 <vc:ValueChooseControl Num="{Binding IS,FallbackValue=-4200,Mode=TwoWay}"
-                                                       Precision="F01"/>
+                                                       Precision="F01" MinValue="-4200" MaxValue="5500"/>
                             </WrapPanel>
 
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
@@ -115,7 +115,7 @@
                             <WrapPanel Background="LightGray" Margin="0 5 0 0">
                                 <TextBlock Text="Entrance Potential(EP)" VerticalAlignment="Center" 
                                            Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Precision="F01" Num="{Binding EP,FallbackValue=35.0}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding EP, FallbackValue=35.0}"/>
                             </WrapPanel>
                             <WrapPanel Background="LightGray" Margin="0 5 0 0" Visibility="{Binding RO2Visibility}">
                                 <TextBlock Text="Collision Cell Rod Offset(RO2)" VerticalAlignment="Center" 
@@ -130,7 +130,7 @@
                             <WrapPanel Background="LightGray" Margin="0 5 0 0" Visibility="{Binding CXPVisibility}">
                                 <TextBlock Text="Collision Cell Exit Potential(CXP)" VerticalAlignment="Center" 
                                            Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Precision="F01" Num="{Binding CXP,FallbackValue=-15.0}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding CXP,FallbackValue=-15.0}" MinValue="-20.0" MaxValue="35.0"/>
                             </WrapPanel>
                         </StackPanel>
                     </TabItem>
@@ -163,7 +163,8 @@
                                     </WrapPanel>
                                     <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                         <TextBlock Width="{StaticResource txbWidth}" Text="Q3 Resolution:" />
-                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}" SelectedValue="{Binding IE3ResolutionValue}"/>
+                                        <ComboBox Width="80" Height="30" ItemsSource="{Binding Resolution}"
+                                                  SelectedValue="{Binding IE3ResolutionValue}"/>
                                     </WrapPanel>
                                     <Button Grid.Row="2" Grid.Column="2" Content="Advanced..." Width="80" 
                                             Height="30" HorizontalAlignment="Right" Background="LightGray"/>
@@ -180,7 +181,7 @@
                             </WrapPanel>
                             <WrapPanel Background="LightGray" Margin="0 0 0 10">
                                 <TextBlock Text="Deflector(DF)" VerticalAlignment="Center" Width="{StaticResource txbWidth}"/>
-                                <vc:ValueChooseControl Precision="F01" Num="{Binding DF,FallbackValue=-100.0}"/>
+                                <vc:ValueChooseControl Precision="F01" Num="{Binding DF,FallbackValue=-100.0}" MinValue="-200.0" MaxValue="1000.0"/>
                             </WrapPanel>
                         </StackPanel>
                     </TabItem>
@@ -189,7 +190,13 @@
 
             <!-- 质谱检测参数 与 高级设置 -->
             <Border Grid.Row="1" Grid.Column="1" Margin="10 0 10 0">
-                <TabControl>
+                <TabControl x:Name="tclMSSetting" SelectionChanged="tclMSSetting_SelectionChanged">
+                    <!--<i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding tclMSSettingCommand}"
+                                                   CommandParameter="{Binding ElementName=tclMSSetting,Path=??}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>-->
                     <TabItem Header="MS">
                         <Grid >
                             <Grid.RowDefinitions>
@@ -209,21 +216,27 @@
                                 <!-- 重写 SelectChanged 映射事件 -->
                                 <ComboBox x:Name="cbxScanType" Width="160" FontSize="10" 
                                           ItemsSource="{Binding ScanTypeList}"
-                                          SelectedIndex="{Binding cbxScanTypeIndex,Mode=TwoWay}">
-                                    <i:Interaction.Triggers>
+                                          SelectedIndex="{Binding cbxScanTypeIndex,Mode=TwoWay}" SelectionChanged="cbxScanType_SelectionChanged">
+                                    <!--<i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding ScanTypeCommand}"
                                                                    CommandParameter="{Binding ElementName=cbxScanType,Path=SelectedValue}" />
                                         </i:EventTrigger>
-                                    </i:Interaction.Triggers>
+                                    </i:Interaction.Triggers>-->
                                 </ComboBox>
                             </WrapPanel>
 
                             <WrapPanel Grid.Row="0" Grid.Column="3" VerticalAlignment="Top">
-                                <StackPanel>
-                                    <CheckBox Content="Center/Width"/>
-                                    <CheckBox Content="Parameter Range" IsChecked="True"/>
+                                <StackPanel Visibility="{Binding cbxCW_PRVisibility,FallbackValue=2}">
+                                    <CheckBox Content="Center/Width" x:Name="cbxCenterWidth" Command="{Binding Center_WidthCommand}" 
+                                              CommandParameter="{Binding ElementName=cbxCenterWidth,Path=IsChecked}"/>
+                                    <CheckBox Content="Parameter Range"  x:Name="cbxParamRange"
+                                              Command="{Binding ParamRangeCommand}" 
+                                              CommandParameter="{Binding ElementName=cbxParamRange,Path=IsChecked}"/>                                   
                                 </StackPanel>
+                                <CheckBox Content="Scheduled MRM" x:Name="cbxScheMRM" VerticalAlignment="Center" 
+                                          Command="{Binding ScheduledMRMCommand}" Visibility="{Binding cbxScheMRMVisibility,FallbackValue=0}"
+                                          CommandParameter="{Binding ElementName=cbxScheMRM,Path=IsChecked}"/>
 
                                 <Button Content="Import List" Margin="30 10 0 10"/>
                             </WrapPanel>
@@ -268,13 +281,13 @@
                                 <CheckBox Content="MCA" Margin="10"/>
                                 <WrapPanel Margin="10 10 0 10" Visibility="{Binding LossGainVisibility}">
                                     <ComboBox Width="100" Margin="0 0 30 0" ItemsSource="{Binding GainLossOfList}"
-                                              x:Name="cbxGainLossOf" SelectedIndex="{Binding cbxLossGainIndex,Mode=TwoWay}">
-                                        <i:Interaction.Triggers>
+                                              x:Name="cbxGainLossOf" SelectedIndex="{Binding cbxLossGainIndex,Mode=TwoWay}" SelectionChanged="cbxGainLossOf_SelectionChanged">
+                                        <!--<i:Interaction.Triggers>
                                             <i:EventTrigger EventName="SelectionChanged">
                                                 <i:InvokeCommandAction Command="{Binding LossGainOfCommand}"
                                                                        CommandParameter="{Binding ElementName=cbxGainLossOf,Path=SelectedValue}" />
                                             </i:EventTrigger>
-                                        </i:Interaction.Triggers>
+                                        </i:Interaction.Triggers>-->
                                     </ComboBox>
                                     <TextBox Width="80" Margin="0 0 10 0" Visibility="{Binding tbxGainOfVisibility,FallbackValue=2}"
                                              VerticalContentAlignment="Center" Text="{Binding GainOfValue,FallbackValue=30.000}"/>
@@ -300,14 +313,17 @@
                                     <TextBlock TextWrapping="Wrap" Width="120" Margin="0 0 10 0"
                                                Text="Total Scan Time (Includes Pauses):" />
                                     <TextBox Width="80" Text="{Binding TotalScanTime,FallbackValue=0.0000}"
-                                             Margin="0 0 10 0" VerticalContentAlignment="Center" x:Name="txbTotalScanTime"/>
+                                             Margin="0 0 10 0" VerticalContentAlignment="Center" x:Name="txbTotalScanTime"
+                                             IsEnabled="{Binding tbxTotalScanTimeEnabled,FallbackValue=0}"/>
                                     <TextBlock Text="(sec)" VerticalAlignment="Center"/>
                                 </WrapPanel>
                             </StackPanel>
 
                             <Border Grid.Row="2" Grid.Column="3" BorderBrush="Gray" BorderThickness="2" Margin="10">
-                                <DataGrid CanUserAddRows="True" x:Name="dgMSConfig" AutoGenerateColumns="False" />
-                                                                 <!--<DataGrid.Columns>
+                                <ScrollViewer>
+                                    <DataGrid CanUserAddRows="True" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="dgMSConfig" AutoGenerateColumns="False"/>
+                                </ScrollViewer>
+                                 <!--<DataGrid.Columns>
                                         <DataGridTextColumn Header="Start(Da)" Width="100" Binding="{Binding Start}"/>
                                         <DataGridTextColumn Header="Stop(Da)" Width="100" Binding="{Binding Stop}"/>
                                         <DataGridTextColumn Header="Time(sec)" Width="*" Binding="{Binding Time}"/>
@@ -322,13 +338,13 @@
                             <WrapPanel Margin="10">
                                 <TextBlock Text="Scan mode:" Width="130"/>
                                 <ComboBox Width="100" x:Name="cbxScanMode" ItemsSource="{Binding ScanModeList}" 
-                                          SelectedIndex="{Binding cbxScanModeIndex}">
-                                    <i:Interaction.Triggers>
+                                          SelectedIndex="{Binding cbxScanModeIndex}" SelectionChanged="cbxScanMode_SelectionChanged">
+                                    <!--<i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding ScanModeCommand}" 
                                                                    CommandParameter="{Binding ElementName=cbxScanMode,Path=SelectedValue}"/>
                                         </i:EventTrigger>
-                                    </i:Interaction.Triggers>
+                                    </i:Interaction.Triggers>-->
                                 </ComboBox>
                             </WrapPanel>
                             <WrapPanel Margin="10 0 10 0">

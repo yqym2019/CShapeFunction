@@ -7,29 +7,31 @@
         mc:Ignorable="d"
         Title="RampParameter Settings" Height="230" Width="300" WindowStyle="ToolWindow"
         Loaded="Window_Loaded">
-    <StackPanel Background="LightGray">
+    <StackPanel Background="LightGray" >
         <WrapPanel Margin="5">
             <TextBlock Text="Parameter" Width="80" Margin="5"/>
-            <ComboBox Width="180" x:Name="cbxParam" />
+            <ComboBox Width="180" x:Name="cbxParam"
+                      SelectionChanged="cbxParam_SelectionChanged" />
         </WrapPanel>
         <WrapPanel Margin="5">
             <TextBlock Text="Start" Width="80" Margin="5"/>
-            <TextBox Width="100" Margin="0 0 10 0"/>
+            <TextBox x:Name="tbxStart" Width="100" Margin="0 0 10 0" IsEnabled="False"/>
             <TextBlock Text="(volts)" VerticalAlignment="Center"/>
         </WrapPanel>
         <WrapPanel Margin="5">
             <TextBlock Text="Stop" Width="80" Margin="5"/>
-            <TextBox Width="100" Margin="0 0 10 0"/>
+            <TextBox x:Name="tbxStop" Width="100" Margin="0 0 10 0" IsEnabled="False"/>
             <TextBlock Text="(volts)" VerticalAlignment="Center"/>
         </WrapPanel>
         <WrapPanel Margin="5">
             <TextBlock Text="Step" Width="80" Margin="5"/>
-            <TextBox Width="100" Margin="0 0 10 0"/>
+            <TextBox x:Name="tbxStep" Width="100" Margin="0 0 10 0" IsEnabled="False"/>
             <TextBlock Text="(volts)" VerticalAlignment="Center"/>
         </WrapPanel>
         <WrapPanel Margin="30 10 30 10">
             <Button x:Name="btnOK" Content="OK" Width="50" Click="btnOK_Click"/>
-            <Button Content="Cancel" Width="50" Margin="10 0 10 0"/>
+            <Button x:Name="btnCancel" Content="Cancel" Width="50" Margin="10 0 10 0"
+                    Click="btnCancel_Click"/>
             <Button Content="Help" Width="50"/>
         </WrapPanel>
     </StackPanel>

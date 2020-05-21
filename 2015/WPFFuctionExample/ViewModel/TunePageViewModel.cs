@@ -22,7 +22,7 @@ namespace WPFFuctionExample.ViewModel
     {
         #region 界面属性
         #region Source/Gas
-        private int cad;
+        private int cad = 4;
         /// <summary>
         /// 碰撞气
         /// </summary>
@@ -32,7 +32,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref cad, value); }
         }
 
-        private int cur;
+        private int cur = 10;
         /// <summary>
         /// 气帘气
         /// </summary>
@@ -46,7 +46,7 @@ namespace WPFFuctionExample.ViewModel
             }
         }
 
-        private int gs1;
+        private int gs1 = 20;
         /// <summary>
         /// 喷雾气
         /// </summary>
@@ -56,7 +56,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref gs1, value); }
         }
 
-        private int gs2;
+        private int gs2 = 0;
         /// <summary>
         /// 辅助加热气
         /// </summary>
@@ -66,7 +66,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref gs2, value); }
         }
 
-        private float iS;
+        private float iS = -4200;
         /// <summary>
         /// 喷雾针高压
         /// </summary>
@@ -76,7 +76,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref iS, value); }
         }
 
-        private float tem;
+        private float tem = 0.0F;
         /// <summary>
         /// 温度
         /// </summary>
@@ -85,7 +85,7 @@ namespace WPFFuctionExample.ViewModel
             get { return tem; }
             set { Set(ref tem, value); }
         }
-        private Visibility cadVisibility;
+        private Visibility cadVisibility = Visibility.Visible;
 
         public Visibility CADVisibility
         {
@@ -96,7 +96,7 @@ namespace WPFFuctionExample.ViewModel
         #endregion
 
         #region Compound
-        private float dp;
+        private float dp = 20.0F;
         /// <summary>
         /// 解离电位
         /// </summary>
@@ -106,7 +106,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref dp, value); }
         }
 
-        private float ep;
+        private float ep = 35.0F;
         /// <summary>
         /// 入口电位
         /// </summary>
@@ -116,21 +116,21 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref ep, value); }
         }
 
-        private float ro2;
+        private float ro2 = 20.0F;
         public float RO2
         {
             get { return ro2; }
             set { Set(ref ro2, value); }
         }
 
-        private float ce;
+        private float ce = 30.0F;
         public float CE
         {
             get { return ce; }
             set { Set(ref ce, value); }
         }
 
-        private float cxp;
+        private float cxp = -15.0F;
         public float CXP
         {
             get { return cxp; }
@@ -138,7 +138,7 @@ namespace WPFFuctionExample.ViewModel
         }
 
         #region 可视属性
-        private Visibility ro2Visibility;
+        private Visibility ro2Visibility = Visibility.Collapsed;
 
         public Visibility RO2Visibility
         {
@@ -146,7 +146,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref ro2Visibility, value); }
         }
 
-        private Visibility ceVisibility;
+        private Visibility ceVisibility = Visibility.Visible;
 
         public Visibility CEVisibility
         {
@@ -154,7 +154,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref ceVisibility, value); }
         }
 
-        private Visibility cxpVisibility;
+        private Visibility cxpVisibility = Visibility.Visible;
 
         public Visibility CXPVisibility
         {
@@ -166,7 +166,7 @@ namespace WPFFuctionExample.ViewModel
         #endregion
 
         #region Resolution
-        private float ie1;
+        private float ie1 = 0.8F;
         /// <summary>
         /// Q1 电位
         /// </summary>
@@ -186,7 +186,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref resolution, value); }
         }
 
-        private float ie3;
+        private float ie3 = 0.8F;
 
         public float IE3
         {
@@ -194,7 +194,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref ie3, value); }
         }
 
-        private string ie1ResolutionValue;
+        private string ie1ResolutionValue = "Low";
         /// <summary>
         /// Q1 的分辨率 下拉框选中项
         /// </summary>
@@ -204,7 +204,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref ie1ResolutionValue, value); }
         }
 
-        private string ie3ResolutionValue;
+        private string ie3ResolutionValue = "Low";
         /// <summary>
         /// Q3 的分辨率 下拉框选中项
         /// </summary>
@@ -214,7 +214,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref ie3ResolutionValue, value); }
         }
         #region 可视属性
-        private Visibility quad1Visibility;
+        private Visibility quad1Visibility = Visibility.Visible;
 
         public Visibility Quad1Visibility
         {
@@ -222,7 +222,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref quad1Visibility, value); }
         }
 
-        private Visibility quad3Visibility;
+        private Visibility quad3Visibility = Visibility.Visible;
 
         public Visibility Quad3Visibility
         {
@@ -233,7 +233,7 @@ namespace WPFFuctionExample.ViewModel
         #endregion
 
         #region Detector
-        private float cem;
+        private float cem = 2200.0F;
         /// <summary>
         /// 检测器高压
         /// </summary>
@@ -243,7 +243,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref cem, value); }
         }
 
-        private float df;
+        private float df = -100.0F;
 
         public float DF
         {
@@ -254,39 +254,35 @@ namespace WPFFuctionExample.ViewModel
         #endregion
 
         #region MS
-        private double gainOfValue;
-
+        private double gainOfValue = 30.000;
         public double GainOfValue
         {
             get { return gainOfValue; }
             set { Set(ref gainOfValue, value); }
         }
 
-        private double lossOfValue;
-
+        private double lossOfValue = 30.000;
         public double LossOfValue
         {
             get { return lossOfValue; }
             set { Set(ref lossOfValue, value); }
         }
 
-        private double productOfValue;
-
+        private double productOfValue = 30.000;
         public double ProductOfValue
         {
             get { return productOfValue; }
             set { Set(ref productOfValue, value); }
         }
 
-        private double precursorOfValue;
-
+        private double precursorOfValue = 30.000;
         public double PrecursorOfValue
         {
             get { return precursorOfValue; }
             set { Set(ref precursorOfValue, value); }
         }
 
-        private double duration;
+        private double duration = 0.000;
         /// <summary>
         /// 执行间隔 (min)
         /// </summary>
@@ -296,7 +292,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref duration, value); }
         }
 
-        private int delayTime;
+        private int delayTime = 0;
         /// <summary>
         /// 延时时间 (sec)
         /// </summary>
@@ -306,7 +302,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref delayTime, value); }
         }
 
-        private int cycles;
+        private int cycles = 0;
         /// <summary>
         /// 执行周期
         /// </summary>
@@ -316,7 +312,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref cycles, value); }
         }
 
-        private double totalScanTime;
+        private double totalScanTime = 0.000;
         /// <summary>
         /// 总检测时间
         /// </summary>
@@ -325,6 +321,8 @@ namespace WPFFuctionExample.ViewModel
             get { return totalScanTime; }
             set { Set(ref totalScanTime, value); }
         }
+
+        private string ScanTypeSelectedValue { get; set; }
 
         #region 可视属性 & 数据集 & 方法集
         private List<string> scanTypeList;
@@ -336,16 +334,15 @@ namespace WPFFuctionExample.ViewModel
             get { return scanTypeList; }
             set { Set(ref scanTypeList, value); }
         }
-        private List<Action> LossGainOfActionList { get; set; }
-        private List<string> gainLossOfList;
 
+        private List<string> gainLossOfList;
         public List<string> GainLossOfList
         {
             get { return gainLossOfList; }
             set { Set(ref gainLossOfList, value); }
         }
-        private Visibility precVisibility;
 
+        private Visibility precVisibility;
         public Visibility PrecVisibility
         {
             get { return precVisibility; }
@@ -353,12 +350,12 @@ namespace WPFFuctionExample.ViewModel
         }
 
         private Visibility productVisibility;
-
         public Visibility ProductVisibility
         {
             get { return productVisibility; }
             set { Set(ref productVisibility, value); }
         }
+
         //Loss Gain of value 部分
         private Visibility lossGainVisibility;
         public Visibility LossGainVisibility 
@@ -380,25 +377,13 @@ namespace WPFFuctionExample.ViewModel
             get { return gainOfVisibility; }
             set { Set(ref gainOfVisibility, value); }
         }
-
-        //表格 信息 绑定数据集
-        private ObservableCollection <MSConfig> msConfigInfo;
-        public ObservableCollection <MSConfig> MSConfigInfo
-        {
-            get { return msConfigInfo; }
-            set {
-                Set(ref msConfigInfo, value);
-            }
-        }
-
-
         #endregion
 
         #endregion
 
         #region Advanced MS
 
-        private float stepSize;
+        private float stepSize = 0.1F;
         /// <summary>
         /// 步长
         /// </summary>
@@ -408,7 +393,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref stepSize, value); }
         }
 
-        private int intensityThreshold;
+        private int intensityThreshold = 0;
         /// <summary>
         /// 强度阈值
         /// </summary>
@@ -418,7 +403,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref intensityThreshold, value); }
         }
 
-        private int settingTime;
+        private int settingTime = 0;
         /// <summary>
         /// 设置时间 (ms
         /// </summary>
@@ -428,7 +413,7 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref settingTime, value); }
         }
 
-        private double mrPauseTime;
+        private double mrPauseTime = 5.007;
         /// <summary>
         /// 质量间隔之间的暂停时间 (ms
         /// </summary>
@@ -438,24 +423,21 @@ namespace WPFFuctionExample.ViewModel
             set { Set(ref mrPauseTime, value); }
         }
 
-        private int massDefect;
-
+        private int massDefect = 55;
         public int MassDefect
         {
             get { return massDefect; }
             set { Set(ref massDefect, value); }
         }
 
-        private int minPeakWidth;
-
+        private int minPeakWidth = 1;
         public int MinPeakWidth
         {
             get { return minPeakWidth; }
             set { Set(ref minPeakWidth, value); }
         }
 
-        private int minPeakSep;
-
+        private int minPeakSep = 1;
         public int MinPeakSep
         {
             get { return minPeakSep; }
@@ -520,12 +502,11 @@ namespace WPFFuctionExample.ViewModel
         public ICommand IHEOffCommand { get; set; }
         public ICommand IHEOnCommand { get; set; }
         public ICommand EditRampParamSettingCommand { get; set; }
-        public ICommand ScanTypeCommand { get; set; }
         public ICommand PositiveCommand { get; set; }
         public ICommand NegativeCommand { get; set; }
-        public ICommand ScanModeCommand { get; set; }
         public ICommand StartCommand    { get; set; }
-        public ICommand LossGainOfCommand { get; set; }
+        public ICommand Center_WidthCommand { get; set; }
+        public ICommand ParamRangeCommand { get; set; }
         #endregion
         #region 对应方法
         private void ChangeLanguage(object IsZh)
@@ -568,13 +549,19 @@ namespace WPFFuctionExample.ViewModel
         {
 
         }
-        private void LossGainOfSelectionChanged(object param)
+        public void LossGainOfSelectionChanged(object param)
         {
-            //int sIndex = (int)param;
-            //if(sIndex>=0)
-            //{
-            //    LossGainOfActionList[sIndex]();
-            //}
+            switch((string)param)
+            {
+                case "Loss Of":
+                    tbxLossOfVisibility = Visibility.Visible;
+                    tbxGainOfVisibility = Visibility.Collapsed;
+                    break;
+                case "Gain Of":
+                    tbxLossOfVisibility = Visibility.Collapsed;
+                    tbxGainOfVisibility = Visibility.Visible;
+                    break;
+            }
         }
         /// <summary>
         /// 编辑属性设置的窗口事件
@@ -586,17 +573,18 @@ namespace WPFFuctionExample.ViewModel
             bool? b = rpsw.ShowDialog();
             if(b??true)
             {
-
+                var c = rpsw.RampParamSettingDicts;
             }
         }
         /// <summary>
         /// 选择类别的选项变更事件
         /// </summary>
         /// <param name="param"></param>
-        private void ScanTypeSelectionChanged(object param)
+        public void ScanTypeSelectionChanged(object param)
         {
             //比对传入的属性 看是那个被选中了 改变页面
-            switch((string)param)
+            ScanTypeSelectedValue = (string)param;
+            switch ((string)param)
             {
                 case "MRM(MRM)":
                     //MRM
@@ -605,22 +593,31 @@ namespace WPFFuctionExample.ViewModel
                     HideThreeValueOf();
                     //构建新表
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, MRMSourceCollection, MRMColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Visible;
+                    cbxCW_PRVisibility = Visibility.Collapsed;
+                    tbxTotalScanTimeEnabled = false;
                     break;
                 case "Neutral Ion(NL)":
                     //NL
                     AllVisibility();
                     HideThreeValueOf();
                     RO2Visibility = Visibility.Collapsed;
-                    LossGainVisibility = Visibility.Visible;
+                    LossGainVisibility = Visibility.Visible;                  
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, NLSourceCollection, NLColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Collapsed;
+                    cbxCW_PRVisibility = Visibility.Visible;
+                    tbxTotalScanTimeEnabled = false;
                     break;
-                case "Precursor Ion(MS2)":
+                case "Precursor Ion(Prec)":
                     //Prec
                     AllVisibility();
                     HideThreeValueOf();
                     RO2Visibility = Visibility.Collapsed;
                     PrecVisibility = Visibility.Visible;
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, PrecSourceCollection, PrecColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Collapsed;                   
+                    cbxCW_PRVisibility = Visibility.Visible;
+                    tbxTotalScanTimeEnabled = false;
                     break;
                 case "Product Ion(MS2)":
                     //MS2 Product
@@ -629,6 +626,9 @@ namespace WPFFuctionExample.ViewModel
                     RO2Visibility = Visibility.Collapsed;
                     ProductVisibility = Visibility.Visible;
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, ProductSourceCollection, ProductColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Collapsed;
+                    cbxCW_PRVisibility = Visibility.Visible;
+                    tbxTotalScanTimeEnabled = false;
                     break;
                 case "Q1 MS(Q1)":
                     //Q1
@@ -638,6 +638,9 @@ namespace WPFFuctionExample.ViewModel
                     CADVisibility = Visibility.Collapsed;
                     Quad3Visibility = Visibility.Collapsed;
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q1SourceCollection, Q1ColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Collapsed;
+                    cbxCW_PRVisibility = Visibility.Visible;
+                    tbxTotalScanTimeEnabled = false;
                     break;
                 case "Q1 Multiple Ions(Q1 M1)":
                     //Q1 M1
@@ -647,6 +650,9 @@ namespace WPFFuctionExample.ViewModel
                     CADVisibility = Visibility.Collapsed;
                     Quad3Visibility = Visibility.Collapsed;
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q1M1SourceCollection, Q1M1ColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Collapsed;
+                    cbxCW_PRVisibility = Visibility.Collapsed;
+                    tbxTotalScanTimeEnabled = false;
                     break;
                 case "Q3 MS(Q3)":
                     //Q3
@@ -656,6 +662,9 @@ namespace WPFFuctionExample.ViewModel
                     CADVisibility = Visibility.Collapsed;
                     Quad1Visibility = Visibility.Collapsed;
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q3SourceCollection, Q3ColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Collapsed;
+                    cbxCW_PRVisibility = Visibility.Visible;
+                    tbxTotalScanTimeEnabled = false;
                     break;
                 case "Q3 Multiple Ions(Q3 M1)":
                     //Q3 M1
@@ -665,10 +674,13 @@ namespace WPFFuctionExample.ViewModel
                     CADVisibility = Visibility.Collapsed;
                     Quad1Visibility = Visibility.Collapsed;
                     GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q3M1SourceCollection, Q3M1ColumnsDataList);
+                    cbxScheMRMVisibility = Visibility.Collapsed;
+                    cbxCW_PRVisibility = Visibility.Collapsed;
+                    tbxTotalScanTimeEnabled = false;
                     break;
             }
         }
-        private void ScanModeSelectionChanged(object param)
+        public void ScanModeSelectionChanged(object param)
         {
             switch((string)param)
             {
@@ -728,29 +740,58 @@ namespace WPFFuctionExample.ViewModel
             PrecVisibility = Visibility.Hidden;
             ProductVisibility = Visibility.Hidden;
         }
-        private List<Action> LossGainOfActionListInit()
+        private void Center_WidthCheckedChanged(object param)
         {
-            List<Action> actionList = new List<Action>()
+            bool b = (bool)param;
+
+            switch (ScanTypeSelectedValue)
+            {               
+                case "Neutral Ion(NL)":
+                    if(b)
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, NLSourceCollection_CW, NLColumnsDataList_CW);
+                    else
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, NLSourceCollection, NLColumnsDataList);
+                    break;
+                case "Precursor Ion(Prec)":
+                    if(b)
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, PrecSourceCollection_CW, PrecColumnsDataList_CW);
+                    else
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, PrecSourceCollection, PrecColumnsDataList);
+                    break;
+                case "Product Ion(MS2)":
+                    if(b)
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, ProductSourceCollection_CW, ProductColumnsDataList_CW);
+                    else
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, ProductSourceCollection, ProductColumnsDataList);
+                    break;
+                case "Q1 MS(Q1)":
+                    if(b)
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q1SourceCollection_CW, Q1ColumnsDataList_CW);
+                    else
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q1SourceCollection, Q1ColumnsDataList);
+                    break;
+               
+                case "Q3 MS(Q3)":
+                    if(b)
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q3SourceCollection_CW, Q3ColumnsDataList_CW);
+                    else
+                        GenerateNewColumnsAndBindingData(_page.dgMSConfig, Q3SourceCollection, Q3ColumnsDataList);
+                    break;             
+            }            
+        }
+        private void ParamRangeCheckedChanged(object param)
+        {
+            bool b = (bool)param;
+            if (b)
             {
-                {
-                    ()=>
-                    {
-                        tbxLossOfVisibility = Visibility.Visible;
-                        tbxGainOfVisibility = Visibility.Collapsed;
-                    }
-                },
-                {
-                    ()=>
-                    {
-                        tbxLossOfVisibility = Visibility.Collapsed;
-                        tbxGainOfVisibility = Visibility.Visible;
-                    }
-                }
-            };
-            return actionList;
+
+            }
+            else
+            {
+
+            }
         }
         #endregion
-
         #endregion
 
         #region 界面操作
@@ -768,10 +809,22 @@ namespace WPFFuctionExample.ViewModel
              new DGColumnsBindData { ColumnsName = "Stop(Da)", ColumnsBindName = "Stop" },
              new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
         };
+        List<DGColumnsBindData> NLColumnsDataList_CW = new List<DGColumnsBindData>()
+        {
+             new DGColumnsBindData { ColumnsName = "Center(Da)", ColumnsBindName = "Center" },
+             new DGColumnsBindData { ColumnsName = "Width(Da)", ColumnsBindName = "Width" },
+             new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
+        };
         List<DGColumnsBindData> PrecColumnsDataList = new List<DGColumnsBindData>()
         {
              new DGColumnsBindData { ColumnsName = "Start(Da)", ColumnsBindName = "Start" },
              new DGColumnsBindData { ColumnsName = "Stop(Da)", ColumnsBindName = "Stop" },
+             new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
+        };
+        List<DGColumnsBindData> PrecColumnsDataList_CW = new List<DGColumnsBindData>()
+        {
+             new DGColumnsBindData { ColumnsName = "Center(Da)", ColumnsBindName = "Center" },
+             new DGColumnsBindData { ColumnsName = "Width(Da)", ColumnsBindName = "Width" },
              new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
         };
         List<DGColumnsBindData> ProductColumnsDataList = new List<DGColumnsBindData>()
@@ -780,10 +833,22 @@ namespace WPFFuctionExample.ViewModel
              new DGColumnsBindData { ColumnsName = "Stop(Da)", ColumnsBindName = "Stop" },
              new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
         };
+        List<DGColumnsBindData> ProductColumnsDataList_CW = new List<DGColumnsBindData>()
+        {
+             new DGColumnsBindData { ColumnsName = "Center(Da)", ColumnsBindName = "Center" },
+             new DGColumnsBindData { ColumnsName = "Width(Da)", ColumnsBindName = "Width" },
+             new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
+        };
         List<DGColumnsBindData> Q1ColumnsDataList = new List<DGColumnsBindData>()
         {
              new DGColumnsBindData { ColumnsName = "Start(Da)", ColumnsBindName = "Start" },
              new DGColumnsBindData { ColumnsName = "Stop(Da)", ColumnsBindName = "Stop" },
+             new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
+        };
+        List<DGColumnsBindData> Q1ColumnsDataList_CW = new List<DGColumnsBindData>()
+        {
+             new DGColumnsBindData { ColumnsName = "Center(Da)", ColumnsBindName = "Center" },
+             new DGColumnsBindData { ColumnsName = "Width(Da)", ColumnsBindName = "Width" },
              new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
         };
         List<DGColumnsBindData> Q1M1ColumnsDataList = new List<DGColumnsBindData>()
@@ -797,6 +862,12 @@ namespace WPFFuctionExample.ViewModel
              new DGColumnsBindData { ColumnsName = "Stop(Da)", ColumnsBindName = "Stop" },
              new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
         };
+        List<DGColumnsBindData> Q3ColumnsDataList_CW = new List<DGColumnsBindData>()
+        {
+             new DGColumnsBindData { ColumnsName = "Center(Da)", ColumnsBindName = "Center" },
+             new DGColumnsBindData { ColumnsName = "Width(Da)", ColumnsBindName = "Width" },
+             new DGColumnsBindData { ColumnsName = "Time(sec)", ColumnsBindName = "Time" }
+        };
         List<DGColumnsBindData> Q3M1ColumnsDataList = new List<DGColumnsBindData>()
         {
              new DGColumnsBindData { ColumnsName = "Q3 Mass(Da)", ColumnsBindName = "Q3Mass" },
@@ -804,38 +875,19 @@ namespace WPFFuctionExample.ViewModel
         };
         #endregion
         #region 8个表格 绑定数据表
-        private ObservableCollection<MSConfig> MRMSourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Q1Mass=11,Q3Mass=33,Id=44,Time=666 }
-        };
-        private ObservableCollection<MSConfig> NLSourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Start= 1,Stop=2,Time = 3 }
-        };
-        private ObservableCollection<MSConfig> PrecSourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Start= 1,Stop=2,Time = 3 }
-        };
-        private ObservableCollection<MSConfig> ProductSourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Start= 1,Stop=2,Time = 3 }
-        };
-        private ObservableCollection<MSConfig> Q1SourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Start= 1,Stop=2,Time = 3 }
-        };
-        private ObservableCollection<MSConfig> Q1M1SourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Q1Mass=11,Time=666 }
-        };
-        private ObservableCollection<MSConfig> Q3SourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Start= 1,Stop=2,Time = 3 }
-        };
-        private ObservableCollection<MSConfig> Q3M1SourceCollection = new ObservableCollection<MSConfig>()
-        {
-            new MSConfig { Q3Mass=33,Time=666 }
-        };
+        private ObservableCollection<MSConfig> MRMSourceCollection = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> NLSourceCollection = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> NLSourceCollection_CW = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> PrecSourceCollection = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> PrecSourceCollection_CW = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> ProductSourceCollection = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> ProductSourceCollection_CW = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> Q1SourceCollection = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> Q1SourceCollection_CW = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> Q1M1SourceCollection = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> Q3SourceCollection = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> Q3SourceCollection_CW = new ObservableCollection<MSConfig>();
+        private ObservableCollection<MSConfig> Q3M1SourceCollection = new ObservableCollection<MSConfig>();
         #endregion
         /// <summary>
         /// 根据所选中项 决定在该表格 新建那些项 并且绑定对应列表项
@@ -845,12 +897,14 @@ namespace WPFFuctionExample.ViewModel
         /// <param name="data">新表格的列信息</param>
         private void GenerateNewColumnsAndBindingData<T>(DataGrid dg,ObservableCollection<T> sourceList, params DGColumnsBindData[] data)
         {
+            sourceList.Clear();
             ClearColumnsInfo(dg);
             foreach (var cbData in data)
             {
                 dg.Columns.Add(new DataGridTextColumn()
                 {
                     Header = cbData.ColumnsName,
+                    Width = 100,
                     Binding = new Binding(cbData.ColumnsBindName)
                 });              
             }
@@ -859,11 +913,13 @@ namespace WPFFuctionExample.ViewModel
         }
         private void GenerateNewColumnsAndBindingData<T>(DataGrid dg, ObservableCollection<T> sourceList, List<DGColumnsBindData> data)  
         {
+            sourceList.Clear();
             ClearColumnsInfo(dg);
             data.ForEach((cbData) => {
                 dg.Columns.Add(new DataGridTextColumn()
                 {
                     Header = cbData.ColumnsName,
+                    Width = 100,
                     Binding = new Binding(cbData.ColumnsBindName)
                 });
             });
@@ -879,6 +935,10 @@ namespace WPFFuctionExample.ViewModel
 
         #region 构造函数
         private TunePage _page { get; set; }
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="page">传入的页面</param>
         public TunePageViewModel(Page page)
         {
             this._page = page as TunePage;
@@ -886,14 +946,11 @@ namespace WPFFuctionExample.ViewModel
             LanguageChangedCommand = new BaseCommand(ChangeLanguage);
             IHEOffCommand = new BaseCommand(IHEOff);
             IHEOnCommand = new BaseCommand(IHEOn);
-            EditRampParamSettingCommand = new BaseCommand(EditRampParamSetting);          
-            LossGainOfActionList = LossGainOfActionListInit();
-            LossGainOfCommand = new BaseCommand(LossGainOfSelectionChanged);
-            ScanTypeCommand = new BaseCommand(ScanTypeSelectionChanged);
-            ScanModeCommand = new BaseCommand(ScanModeSelectionChanged);   
+            EditRampParamSettingCommand = new BaseCommand(EditRampParamSetting);            
             PositiveCommand = new BaseCommand(PolanityChange);
             NegativeCommand = new BaseCommand(PolanityChange);
-            TestCommand = new BaseCommand(TestFuc);               
+            TestCommand = new BaseCommand(TestFuc);
+            Center_WidthCommand = new BaseCommand(Center_WidthCheckedChanged);
             LoadData();        
         }
         #endregion
@@ -920,6 +977,28 @@ namespace WPFFuctionExample.ViewModel
             get { return cbxscanmodeIndex; }
             set { Set(ref cbxscanmodeIndex, value); }
         }
+
+        private Visibility CW_PRVisibility = Visibility.Collapsed;
+        public Visibility cbxCW_PRVisibility
+        {
+            get { return CW_PRVisibility; }
+            set { Set(ref CW_PRVisibility, value); }
+        }
+
+        private Visibility ScheMRMVisibility = Visibility.Visible;
+        public Visibility cbxScheMRMVisibility
+        {
+            get { return ScheMRMVisibility; }
+            set { Set(ref ScheMRMVisibility, value); }
+        }
+
+        private bool TotalScanTimeEnabled = false;
+        public bool tbxTotalScanTimeEnabled
+        {
+            get { return TotalScanTimeEnabled; }
+            set { Set(ref TotalScanTimeEnabled, value); }
+        }
+
         #endregion
         /// <summary>
         /// 列表数据 加载
@@ -930,36 +1009,30 @@ namespace WPFFuctionExample.ViewModel
             ScanTypeList = dataS.GetAllType(Model.LanguageType.en, Model.UIConfigType.ScanType);
             Resolution = dataS.GetAllType(Model.LanguageType.en, Model.UIConfigType.Resolution);
             ScanModeList = dataS.GetAllType(Model.LanguageType.en, Model.UIConfigType.ScanMode);
-            GainLossOfList = dataS.GetAllType(Model.LanguageType.en, Model.UIConfigType.MS_OffSet);
-            DefaultInit();          
+            GainLossOfList = dataS.GetAllType(Model.LanguageType.en, Model.UIConfigType.MS_OffSet);               
         }
-
-        DispatcherTimer dt = new DispatcherTimer();
-      
-        /// <summary>
-        /// 各个属性的初始值设置
-        /// </summary>
-        private void DefaultInit()
+        #region TabItem 每块 触发事件 的初始值
+        public void TabItemInit(string header)
         {
-            Task.Factory.StartNew(() =>
+            switch(header)
             {
-                Thread.Sleep(1000);
-                cbxScanTypeIndex = 0;
-                cbxLossGainIndex = 0;
-                cbxScanModeIndex = 0;
+                case "MS":
+                    cbxScanTypeIndex = 0;
+                    cbxLossGainIndex = 0;
+                    break;
+                case "Advanced MS":
+                    cbxScanModeIndex = 0;
+                    break;
             }
-            );                         
         }
+        #endregion
         #endregion
 
         #region 测试
         public ICommand TestCommand { get; set; }
         private void TestFuc(object param)
         {
-            foreach(var c in MSConfigInfo)
-            {
-
-            }
+           
         }
         #endregion
     }

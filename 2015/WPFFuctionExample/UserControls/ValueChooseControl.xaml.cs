@@ -89,26 +89,35 @@ namespace WPFFuctionExample.UserControls
             return result;
         }
         #endregion
-
+        
         #region 依赖属性
         #region 当前参数
         /// <summary>
         /// 当前参数
         /// </summary>
-        public string Num
+        public object Num
         {
-            get { return (string)GetValue(NumProperty); }
+            get { return GetValue(NumProperty); }
             set { SetValue(NumProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty NumProperty = DependencyProperty.Register("Num", typeof(string), typeof(ValueChooseControl),
+        public static readonly DependencyProperty NumProperty = DependencyProperty.Register("Num", typeof(object), typeof(ValueChooseControl),
             new PropertyMetadata(null, new PropertyChangedCallback(OnValueChanged)));
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var sender = d as ValueChooseControl;
-            sender.Num = (string)e.NewValue;
-            sender.txbInfo.Text = sender.Num.ToString();
+            sender.Num = e.NewValue;
+            //进行超界判断
+            if (!sender.IsOverLimit())
+            {                
+                sender.txbInfo.Text = sender.Num.ToString();
+            }
+            else
+            {                
+                sender.Num = e.OldValue;
+                MessageBox.Show(string.Format("Min:{0} Max:{1} Value:{2}", sender.MinValue.ToString(), sender.MaxValue.ToString(), e.NewValue), "超出范围!");
+            }
         }
         #endregion
 
@@ -131,33 +140,6 @@ namespace WPFFuctionExample.UserControls
         {
             
         }
-        #endregion
-
-        #region 默认值
-        /*
-        public string DefaultValue
-        {
-            get { return (string)GetValue(DefaultValueProperty); }
-            set { SetValue(DefaultValueProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for DefaultValue.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DefaultValueProperty =
-            DependencyProperty.Register("DefaultValue", typeof(string), typeof(ValueChooseControl),
-                new PropertyMetadata(null, new PropertyChangedCallback(OnDefaultValueChanged)));
-
-        private static void OnDefaultValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            //判别是否默认值设置的不是个数字
-            var sender = d as ValueChooseControl;
-            string str = sender.DefaultValue;
-            if(sender.IsNumberic(str))
-            {
-                ValueChooseControl.defaultValue = str;
-            }
-        }
-        */
-
         #endregion
             
         #region Width Height 等比缩放
@@ -204,27 +186,139 @@ namespace WPFFuctionExample.UserControls
 
         #endregion
 
+        #region 取值范围       
+
+        public object MinValue
+        {
+            get { return (object)GetValue(MinValueProperty); }
+            set { SetValue(MinValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MinValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MinValueProperty =
+            DependencyProperty.Register("MinValue", typeof(object), typeof(ValueChooseControl), new PropertyMetadata(null,new PropertyChangedCallback(OnMinValuePropertyChanged)));
+
+        private static void OnMinValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var sender = d as ValueChooseControl;           
+            sender.MinValue = sender.IsNumberic(e.NewValue.ToString())? e.NewValue:e.OldValue;
+        }
+
+        public object MaxValue
+        {
+            get { return GetValue(MaxValueProperty); }
+            set { SetValue(MaxValueProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MaxValue.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MaxValueProperty =
+            DependencyProperty.Register("MaxValue", typeof(object), typeof(ValueChooseControl), new PropertyMetadata(null,new PropertyChangedCallback(OnMaxValuePropertyChanged)));
+
+        private static void OnMaxValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var sender = d as ValueChooseControl;
+            sender.MaxValue = sender.IsNumberic(e.NewValue.ToString()) ? e.NewValue : e.OldValue;
+            bool IsMax_Min = false;
+            //根据进制 判断是否比 最小值大
+            switch (sender.Precision)
+            {
+                case PrecisionType.D00001:                   
+                case PrecisionType.D0001:
+                    IsMax_Min = double.Parse(sender.MinValue.ToString()) < double.Parse(e.NewValue.ToString());
+                    break;
+                  
+                case PrecisionType.F001:                   
+                case PrecisionType.F01:
+                    IsMax_Min = float.Parse(sender.MinValue.ToString()) < float.Parse(e.NewValue.ToString());
+                    break;
+                case PrecisionType.I1:                   
+                case PrecisionType.I10:                 
+                case PrecisionType.I100:
+                    IsMax_Min = int.Parse(sender.MinValue.ToString()) < int.Parse(e.NewValue.ToString());
+                    break;
+            }
+            sender.MaxValue = IsMax_Min ? e.NewValue : e.OldValue;
+        }
+
+        #endregion
         #endregion
 
         #region 构造函数
         public ValueChooseControl()
         {
             InitializeComponent();
+            Init();
+        }
+        #endregion
+
+        #region 部分配置的初始化设定
+        private void Init()
+        {
+            Precision = PrecisionType.I1;
+            MinValue = -1;
+            MaxValue = 100000;
+            Num = 0;
         }
         #endregion
 
         #region 触发事件
         private void btnSub_Click(object sender, RoutedEventArgs e)
         {
-            if(Num!=null)
-                Num = ChangeValue(Precision,Num, true);
+            if (Num != null)
+            {
+                Num = ChangeValue(Precision, Num.ToString(), true);                
+            }
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if(Num!=null)
-                Num = ChangeValue(Precision,Num, false);
+                Num = ChangeValue(Precision,Num.ToString(), false);
         }
+        /// <summary>
+        /// 检测 文本框里面内容 有没有超界
+        /// </summary>
+        /// <returns></returns>
+        private bool IsOverLimit()
+        {
+            if (Num == null) return true;
+            if (!IsNumberic(Num.ToString())) return true;
+            bool IsLimit = false;
+            //根据当前 进制 转换进行比较
+            switch (Precision)
+            {
+                case PrecisionType.D00001:
+                case PrecisionType.D0001:
+                    IsLimit = (double.Parse(MinValue.ToString()) <= double.Parse( Num.ToString()) && double.Parse(Num.ToString()) <=  double.Parse(MaxValue.ToString()) );
+                    break;
+
+                case PrecisionType.F001:
+                case PrecisionType.F01:
+                    IsLimit = (float.Parse(MinValue.ToString()) <= float.Parse(Num.ToString()) && float.Parse(Num.ToString()) <= float.Parse(MaxValue.ToString()));
+                    break;
+                case PrecisionType.I1:
+                case PrecisionType.I10:
+                case PrecisionType.I100:
+                    IsLimit = (int.Parse(MinValue.ToString()) <= int.Parse(Num.ToString()) && int.Parse(Num.ToString()) <= int.Parse(MaxValue.ToString()));
+                    break;
+            }
+
+            return !IsLimit;
+        }
+        private void txbInfo_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key == System.Windows.Input.Key.Enter)
+            {
+                var tb = sender as TextBox;
+                Num = tb.Text;
+                //if (IsOverLimit())
+                //{
+                //    Num = 0;
+                //    MessageBox.Show("超出范围!", string.Format("Min:{0} Max:{1} ", MinValue.ToString(), MaxValue.ToString()));
+                //}
+            }          
+        }
+
         #endregion
     }
 }

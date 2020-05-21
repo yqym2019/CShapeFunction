@@ -8,7 +8,7 @@
              d:DesignHeight="{Binding UCHeight}" d:DesignWidth="{Binding UCWidth}" >
     <Grid >
         <WrapPanel>
-            <TextBox x:Name="txbInfo" Width="50" />
+            <TextBox x:Name="txbInfo" Width="50" KeyDown="txbInfo_KeyDown"/>
             <StackPanel x:Name="spButton" Width="20">
                 <Button  x:Name="btnSub" Click="btnSub_Click">
                     <Button.Content>

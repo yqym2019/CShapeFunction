@@ -17,5 +17,7 @@ namespace WPFFuctionExample.Model
         public int Q1Mass { get; set; }
         public int Q3Mass { get; set; }
         public int Id { get; set; }
+        public int Center { get; set; }
+        public int Width { get; set; }
     }
 }
