@@ -254,6 +254,7 @@ namespace WPFFuctionExample.ViewModel
         #endregion
 
         #region MS
+        #region 基础属性
         private double gainOfValue = 30.000;
         public double GainOfValue
         {
@@ -323,7 +324,7 @@ namespace WPFFuctionExample.ViewModel
         }
 
         private string ScanTypeSelectedValue { get; set; }
-
+        #endregion
         #region 可视属性 & 数据集 & 方法集
         private List<string> scanTypeList;
         /// <summary>
@@ -377,6 +378,21 @@ namespace WPFFuctionExample.ViewModel
             get { return gainOfVisibility; }
             set { Set(ref gainOfVisibility, value); }
         }
+
+        private Visibility _splSMRMVisibilty;
+        public Visibility splSMRMVisibility
+        {
+            get { return _splSMRMVisibilty; }
+            set { Set(ref _splSMRMVisibilty, value); }
+        }
+
+        private Visibility _splMSSet1Visbility;
+        public Visibility splMSSet1Visibility
+        {
+            get { return _splMSSet1Visbility; }
+            set { Set(ref _splMSSet1Visbility, value); }
+        }
+
         #endregion
 
         #endregion
@@ -507,6 +523,7 @@ namespace WPFFuctionExample.ViewModel
         public ICommand StartCommand    { get; set; }
         public ICommand Center_WidthCommand { get; set; }
         public ICommand ParamRangeCommand { get; set; }
+        public ICommand ScheduledMRMCommand { get; set; }
         #endregion
         #region 对应方法
         private void ChangeLanguage(object IsZh)
@@ -791,6 +808,24 @@ namespace WPFFuctionExample.ViewModel
 
             }
         }
+        private void ScheduledMRMCheckedChanged(object param)
+        {
+            bool b = (bool)param;
+            if(b)
+            {
+                splMSSet1Visibility = Visibility.Collapsed;
+                splSMRMVisibility = Visibility.Visible;
+                Cycles = 1;
+                Duration = 0.017;
+            }
+            else
+            {
+                splMSSet1Visibility = Visibility.Visible;
+                splSMRMVisibility = Visibility.Collapsed;
+                Cycles = 0;
+                Duration = 0;
+            }
+        }
         #endregion
         #endregion
 
@@ -949,7 +984,7 @@ namespace WPFFuctionExample.ViewModel
             EditRampParamSettingCommand = new BaseCommand(EditRampParamSetting);            
             PositiveCommand = new BaseCommand(PolanityChange);
             NegativeCommand = new BaseCommand(PolanityChange);
-            TestCommand = new BaseCommand(TestFuc);
+            AcquireCommand = new BaseCommand(AcquireFuc);
             Center_WidthCommand = new BaseCommand(Center_WidthCheckedChanged);
             LoadData();        
         }
@@ -1029,10 +1064,11 @@ namespace WPFFuctionExample.ViewModel
         #endregion
 
         #region 测试
-        public ICommand TestCommand { get; set; }
-        private void TestFuc(object param)
+        public ICommand AcquireCommand { get; set; }
+        private void AcquireFuc(object param)
         {
-           
+            AcquireToDiskWindow atdW = new AcquireToDiskWindow();
+            atdW.ShowDialog();
         }
         #endregion
     }

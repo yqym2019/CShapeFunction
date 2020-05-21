@@ -33,7 +33,7 @@
             <!-- 一排按钮 和 方法选择下拉框 -->
             <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
                 <WrapPanel VerticalAlignment="Center">
-                    <Button Content="Acquire" Margin="3 0 3 0" Width="100" Command="{Binding TestCommand}"/>
+                    <Button Content="Acquire" Margin="3 0 3 0" Width="100" Command="{Binding AcquireCommand}"/>
                     <Button Content="Start" Margin="3 0 3 0" Width="100" Command="{Binding StartCommand}"/>
                     <CheckBox Content="Ramp Paramter" VerticalAlignment="Center"/>
                     <Button Content="Edit Ramp..." Margin="10 0 10 0" Width="100" Command="{Binding EditRampParamSettingCommand}"/>
@@ -272,12 +272,14 @@
                                     </WrapPanel>
                                     <WrapPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
                                         <TextBlock Text="Cycles:" Margin="0 0 10 0"/>
-                                        <vc:ValueChooseControl  UCHeight="30" UCWidth="70" Precision="I1" Num="{Binding Cycles,FallbackValue=1}"/>
+                                        <vc:ValueChooseControl  UCHeight="30" UCWidth="70" Precision="I1" 
+                                                                Num="{Binding Cycles,FallbackValue=1}"/>
                                     </WrapPanel>
                                 </Grid>
                             </GroupBox>
-
-                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                            
+                            <!-- MCA 总时间等设置 -->
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Visibility="{Binding splMSSet1Visibility,FallbackValue=2}">
                                 <CheckBox Content="MCA" Margin="10"/>
                                 <WrapPanel Margin="10 10 0 10" Visibility="{Binding LossGainVisibility}">
                                     <ComboBox Width="100" Margin="0 0 30 0" ItemsSource="{Binding GainLossOfList}"
@@ -319,6 +321,21 @@
                                 </WrapPanel>
                             </StackPanel>
 
+                            <!-- Scheduled MRM 模式 -->
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" 
+                                        Visibility="{Binding splSMRMVisibility}" >
+                                <WrapPanel >
+                                    <TextBlock Text="MRM detection window:" Width="150"/>
+                                    <TextBox Width="60"/>
+                                    <TextBlock Text="(sec)"/>
+                                </WrapPanel>
+                                <WrapPanel >
+                                    <TextBlock Text="Target Scan Time:" Width="150"/>
+                                    <TextBox Width="60"/>
+                                    <TextBlock Text="(sec)"/>
+                                </WrapPanel>
+                            </StackPanel>
+                            
                             <Border Grid.Row="2" Grid.Column="3" BorderBrush="Gray" BorderThickness="2" Margin="10">
                                 <ScrollViewer>
                                     <DataGrid CanUserAddRows="True" Width="Auto" VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="dgMSConfig" AutoGenerateColumns="False"/>
